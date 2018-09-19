@@ -2,53 +2,10 @@
 #include "Level.h"
 #include "game_sv_capture_the_artefact.h"
 
-game_sv_CaptureTheArtefact::MyTeam::MyTeam()
-{
-    indexOfTeamInList = 0;
-    playersCount = 0;
-    rPointInitialized = false;
-    artefactActivated = false;
-    artefact = NULL;
-    artefactOwner = NULL;
-    score = 0;
-    freeArtefactTimeStart = 0;
-    activationArtefactTimeStart = 0;
-    last_activator_id = 0;
-}
-
-game_sv_CaptureTheArtefact::MyTeam::MyTeam(const MyTeam& clone)
-{
-    indexOfTeamInList = clone.indexOfTeamInList;
-    playersCount = clone.playersCount;
-    teamName = clone.teamName;
-    artefactRPoint = clone.artefactRPoint;
-    rPointInitialized = clone.rPointInitialized;
-    artefactActivated = clone.artefactActivated;
-    artefactName = clone.artefactName;
-    artefact = clone.artefact;
-    artefactOwner = clone.artefactOwner;
-    score = clone.score;
-    freeArtefactTimeStart = clone.freeArtefactTimeStart;
-    activationArtefactTimeStart = clone.activationArtefactTimeStart;
-    last_activator_id = clone.last_activator_id;
-}
-
 game_sv_CaptureTheArtefact::MyTeam::MyTeam(
     TEAM_DATA_LIST::size_type indexInTeamList, u16 pCount, const shared_str& tName, const shared_str& aName)
-{
-    indexOfTeamInList = indexInTeamList;
-    playersCount = pCount;
-    teamName = tName;
-    rPointInitialized = false;
-    artefactActivated = false;
-    artefactName = aName;
-    artefact = NULL;
-    artefactOwner = NULL;
-    score = 0;
-    freeArtefactTimeStart = 0;
-    activationArtefactTimeStart = 0;
-    last_activator_id = 0;
-}
+    : indexOfTeamInList(indexInTeamList), playersCount(pCount), teamName(tName), artefactName(aName)
+{}
 
 void game_sv_CaptureTheArtefact::MyTeam::SetArtefactRPoint(const RPoint& rpoint)
 {

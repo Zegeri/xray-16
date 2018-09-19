@@ -1043,7 +1043,7 @@ void game_sv_CaptureTheArtefact::LoadAnomalySet()
         if (!level_ini_file->line_exist(CTA_ANOMALY_SET_BASE_NAME, set_id_str))
             continue;
 
-        m_AnomalySet.push_back(std::make_pair(TAnomaliesVector(), u8(0)));
+        m_AnomalySet.emplace_back(TAnomaliesVector(), u8(0));
 
         if (!LoadAnomaliesItems(set_id_str, m_AnomalySet.back().first))
             m_AnomalySet.erase(m_AnomalySet.end() - 1);
@@ -1054,31 +1054,25 @@ void game_sv_CaptureTheArtefact::LoadAnomalySet()
 
 void game_sv_CaptureTheArtefact::StopPreviousAnomalies()
 {
-    typedef TAnomalySet::iterator TAnomIter;
-    TAnomIter ie = m_AnomalySet.end();
-    for (TAnomIter i = m_AnomalySet.begin(); i != ie; ++i)
-    {
-        i->second = 0;
-    }
+    for (auto& [anomaly, status] : m_AnomalySet)
+        status = 0;
 }
 
 void game_sv_CaptureTheArtefact::ReStartRandomAnomaly()
 {
     typedef TAnomalySet::size_type TAnomSize;
-    typedef TAnomalySet::iterator TAnomIter;
     typedef xr_set<TAnomSize> TSAnomsSet;
 
     if (!m_AnomalySet.size())
         return;
 
     TSAnomsSet started_set;
-    TAnomIter anoms_ie = m_AnomalySet.end();
     TAnomSize pos = 0;
     TAnomSize to_start = 0;
 
-    for (TAnomIter i = m_AnomalySet.begin(); i != anoms_ie; ++i)
+    for (auto& [anomaly, status] : m_AnomalySet)
     {
-        if (i->second)
+        if (status)
             started_set.insert(pos);
         ++pos;
     }
@@ -1103,13 +1097,10 @@ void game_sv_CaptureTheArtefact::ReStartRandomAnomaly()
 void game_sv_CaptureTheArtefact::AddAnomalyChanges(
     NET_Packet& packet, TAnomaliesVector const& anomalies, CCustomZone::EZoneState state)
 {
-    typedef TAnomaliesVector::const_iterator TAnomIter;
-    TAnomIter ie = anomalies.end();
-
-    for (TAnomIter i = anomalies.begin(); i != ie; ++i)
+    for (const auto& [anomaly, status] : anomalies)
     {
         NET_Packet temp_packet;
-        u_EventGen(temp_packet, GE_ZONE_STATE_CHANGE, i->second);
+        u_EventGen(temp_packet, GE_ZONE_STATE_CHANGE, status);
         temp_packet.w_u8(static_cast<u8>(state));
 
         VERIFY2((packet.w_tell() + temp_packet.B.count) < NET_PacketSizeLimit, "event packet exceeds size !");
@@ -1125,19 +1116,16 @@ void game_sv_CaptureTheArtefact::SendAnomalyStates()
 
     AddAnomalyChanges(event_pack, m_AnomaliesPermanent, CCustomZone::eZoneStateIdle);
 
-    typedef TAnomalySet::iterator TAnomSetIter;
-    TAnomSetIter ie = m_AnomalySet.end();
-
     // this order of for blocks is necessarily, because enabling of zones must be at last
-    for (TAnomSetIter i = m_AnomalySet.begin(); i != ie; ++i)
+    for (const auto& [anomaly, status] : m_AnomalySet)
     {
-        if (!i->second)
-            AddAnomalyChanges(event_pack, i->first, CCustomZone::eZoneStateDisabled);
+        if (!status)
+            AddAnomalyChanges(event_pack, anomaly, CCustomZone::eZoneStateDisabled);
     }
-    for (TAnomSetIter i = m_AnomalySet.begin(); i != ie; ++i)
+    for (const auto& [anomaly, status] : m_AnomalySet)
     {
-        if (i->second)
-            AddAnomalyChanges(event_pack, i->first, CCustomZone::eZoneStateIdle);
+        if (status)
+            AddAnomalyChanges(event_pack, anomaly, CCustomZone::eZoneStateIdle);
     }
     m_dwLastAnomalyStartTime = Level().timeServer();
     u_EventSend(event_pack);
@@ -1207,9 +1195,9 @@ void game_sv_CaptureTheArtefact::LoadArtefactRPoints()
         FS.r_close(F);
     }
     // verifying initialization of all rpoints
-    for (TeamsMap::const_iterator i = teams.begin(); i != teams.end(); i++)
+    for (const auto& team : teams)
     {
-        if (!i->second.rPointInitialized)
+        if (!team.second.rPointInitialized)
         {
             VERIFY2(false, make_string("Not found RPoint for team %d", i->first).c_str());
         }
@@ -1918,9 +1906,8 @@ void game_sv_CaptureTheArtefact::OnDetachItem(CSE_ActorMP* actor, CSE_Abstract* 
         // may be there is a sense to move next invokation into the ProcessDeath method...
         FillDeathActorRejectItems(actor, to_reject);
 
-        for (xr_vector<u16>::const_iterator it = actor->children.begin(); it != it_e; ++it)
+        for (const u16& ItemID : actor->children)
         {
-            u16 ItemID = *it;
             CSE_Abstract* e_item = get_entity_from_eid(ItemID);
 
             R_ASSERT(e_item->ID_Parent == actor->ID);
@@ -1941,16 +1928,14 @@ void game_sv_CaptureTheArtefact::OnDetachItem(CSE_ActorMP* actor, CSE_Abstract* 
             }
         }
 
-        xr_vector<CSE_Abstract*>::const_iterator tr_it_e = to_transfer.end();
-
         NET_Packet EventPack;
         NET_Packet PacketReject;
         NET_Packet PacketTake;
         EventPack.w_begin(M_EVENT_PACK);
 
-        for (xr_vector<CSE_Abstract*>::const_iterator tr_it = to_transfer.begin(); tr_it != tr_it_e; ++tr_it)
+        for (const auto& transfer : to_transfer)
         {
-            m_server->Perform_transfer(PacketReject, PacketTake, *tr_it, actor, item);
+            m_server->Perform_transfer(PacketReject, PacketTake, transfer, actor, item);
             EventPack.w_u8(u8(PacketReject.B.count));
             EventPack.w(&PacketReject.B.data, PacketReject.B.count);
             EventPack.w_u8(u8(PacketTake.B.count));
@@ -2375,16 +2360,14 @@ bool game_sv_CaptureTheArtefact::ResetInvincibility(ClientID const clientId)
 
 void game_sv_CaptureTheArtefact::ResetTimeoutInvincibility(u32 currentTime)
 {
-    InvincibilityTimeouts::iterator ii = m_invTimeouts.begin();
-    InvincibilityTimeouts::iterator iie = m_invTimeouts.end();
     bool resetted = false;
 
-    for (; ii != iie; ++ii)
+    for (auto& [id, time] : m_invTimeouts)
     {
-        if ((currentTime >= ii->second) && (ii->second != 0))
+        if ((currentTime >= time) && (time != 0))
         {
-            resetted = ResetInvincibility(ii->first);
-            ii->second = 0;
+            resetted = ResetInvincibility(id);
+            time = 0;
         }
     }
 

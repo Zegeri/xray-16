@@ -13,25 +13,25 @@ private:
 
     struct MyTeam
     {
-        TEAM_DATA_LIST::size_type indexOfTeamInList;
-        u16 playersCount;
-        s32 score;
+        TEAM_DATA_LIST::size_type indexOfTeamInList = 0;
+        u16 playersCount = 0;
+        s32 score = 0;
         // warning teamName must be <= 256 bytes !
         shared_str teamName;
-        bool rPointInitialized;
-        bool artefactActivated;
+        bool rPointInitialized = false;
+        bool artefactActivated  = false;
 
         RPoint artefactRPoint;
         shared_str artefactName;
-        CSE_ALifeItemArtefact* artefact;
-        CSE_ActorMP* artefactOwner;
-        u32 freeArtefactTimeStart;
-        u16 last_activator_id;
+        CSE_ALifeItemArtefact* artefact = nullptr;
+        CSE_ActorMP* artefactOwner = nullptr;
+        u32 freeArtefactTimeStart = 0;
+        u16 last_activator_id = 0;
 
-        u32 activationArtefactTimeStart;
+        u32 activationArtefactTimeStart = 0;
 
-        MyTeam();
-        MyTeam(const MyTeam& clone);
+        MyTeam() = default;
+        MyTeam(const MyTeam& clone) = default;
         MyTeam(TEAM_DATA_LIST::size_type indexInTeamList, u16 pCount, const shared_str& tName, const shared_str& aName);
         void SetArtefactRPoint(const RPoint& rpoint);
         void OnPlayerAttachArtefact(CSE_ActorMP* newArtefactOwner);
