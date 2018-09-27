@@ -18,12 +18,7 @@
 
 #include "LightAnimLibrary.h"
 #include "xrCDB/ISpatial.h"
-#if defined(WINDOWS)
 #include "Text_Console.h"
-#elif defined(LINUX)
-#define CTextConsole CConsole
-#pragma todo("Implement text console or it's alternative")
-#endif
 #if !defined(LINUX)
 #include "xrSASH.h"
 #endif
@@ -102,7 +97,15 @@ ENGINE_API void InitSettings()
 ENGINE_API void InitConsole()
 {
     if (GEnv.isDedicatedServer)
-        Console = new CTextConsole();
+    {
+#if defined(LINUX)
+        Console = new CTextConsoleSDL();
+#elif defined(WINDOWS)
+        Console = new CTextConsoleWindows();
+#else
+        Console = new CConsole();
+#endif
+    }
     else
         Console = new CConsole();
 

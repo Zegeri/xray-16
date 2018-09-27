@@ -1,13 +1,152 @@
 #include "stdafx.h"
 #include "Text_Console.h"
 #include "line_editor.h"
-#include "SDL_syswm.h"
+#include <SDL_syswm.h>
+#ifdef LINUX
+#include <SDL_ttf.h>
+#endif
 
 extern char const* const ioc_prompt;
 extern char const* const ch_cursor;
 int g_svTextConsoleUpdateRate = 1;
 
-CTextConsole::CTextConsole()
+#ifdef LINUX
+void CTextConsoleSDL::Initialize()
+{
+    inherited::Initialize();
+
+    R_ASSERT3(TTF_Init() == 0, "Unable to initialize TTF", TTF_GetError());
+
+    CreateConsoleWnd();
+}
+
+void CTextConsoleSDL::Destroy()
+{
+    inherited::Destroy();
+
+    TTF_CloseFont(m_font);
+    SDL_DestroyWindow(m_window);
+}
+
+void CTextConsoleSDL::CreateConsoleWnd()
+{
+    int lX, lY;
+    int lWidth, lHeight;
+    SDL_GetWindowPosition(Device.m_sdlWnd, &lX, &lY);
+    SDL_GetWindowSize(Device.m_sdlWnd, &lWidth, &lHeight);
+
+    m_window = SDL_CreateWindow("XRAY Text Console", lX, lY, lWidth, lHeight, SDL_WINDOW_SHOWN);
+
+    R_ASSERT3(m_window, "Unable to Create TextConsole Window", SDL_GetError());
+
+    m_window_surface = SDL_GetWindowSurface(m_window);
+    m_background_color = SDL_MapRGB(m_window_surface->format, 128, 128, 128);
+    SDL_FillRect(m_window_surface, NULL, m_background_color);
+    SDL_UpdateWindowSurface(m_window);
+
+    // TODO: Find font dynamically using fontconfig
+    m_font = TTF_OpenFont("/usr/share/fonts/TTF/arial.ttf", 12);
+    R_ASSERT3(m_font, "Unable to load font", TTF_GetError());
+};
+
+void CTextConsoleSDL::OnFrame()
+{
+}
+
+
+void CTextConsoleSDL::DrawText(const char* text, int x, int y, SDL_Color color)
+{
+    SDL_Rect dst_rect = {x, y, 0, 0};
+    SDL_Surface* text_surface = TTF_RenderUTF8_Solid(m_font, text, color);
+    SDL_BlitSurface(text_surface, NULL, m_window_surface, &dst_rect);
+    SDL_FreeSurface(text_surface);
+}
+
+void CTextConsoleSDL::OnPaint()
+{
+    SDL_FillRect(m_window_surface, NULL, m_background_color);
+
+    int Width, Height;
+    SDL_GetWindowSize(m_window, &Width, &Height);
+    int y_top_max = (int)(0.32f * Height);
+
+    int font_height = TTF_FontHeight(m_font);
+
+    //---------------------------------------------------------------------------------
+    LPCSTR s_edt = ec().str_edit();
+    LPCSTR s_cur = ec().str_before_cursor();
+
+    u32 cur_len = xr_strlen(s_cur) + xr_strlen(ch_cursor) + 1;
+    PSTR buf = (PSTR)_alloca(cur_len * sizeof(char));
+    xr_strcpy(buf, cur_len, s_cur);
+    xr_strcat(buf, cur_len, ch_cursor);
+    buf[cur_len - 1] = 0;
+
+    u32 cur0_len = xr_strlen(s_cur);
+
+    int xb = 25;
+
+    DrawText(buf, xb, Height - font_height - 1, {255, 255, 255});
+    buf[cur0_len] = 0;
+    DrawText(buf, xb, Height - font_height - 1, {0, 0, 0});
+    DrawText(ioc_prompt, 0, Height - font_height - 3, {255, 255, 255}); // ">>> "
+    DrawText(s_edt, xb, Height - font_height - 3, {255, 0, 0});
+
+    u32 log_line = LogFile.size() - 1;
+    string16 q, q2;
+    xr_itoa(log_line, q, 10);
+    xr_strcpy(q2, sizeof(q2), "[");
+    xr_strcat(q2, sizeof(q2), q);
+    xr_strcat(q2, sizeof(q2), "]");
+    u32 qn = xr_strlen(q2);
+    DrawText(q2, Width - 8 * qn, Height - font_height - font_height, {205, 205, 225});
+
+    int ypos = Height - font_height - font_height;
+    for (int i = LogFile.size() - 1 - scroll_delta; i >= 0; --i)
+    {
+        ypos -= font_height;
+        if (ypos < y_top_max)
+        {
+            break;
+        }
+        LPCSTR ls = LogFile[i].c_str();
+
+        if (!ls)
+        {
+            continue;
+        }
+        Console_mark cm = (Console_mark)ls[0];
+        u8 b = (is_mark(cm)) ? 2 : 0;
+        LPCSTR pOut = ls + b;
+
+        DrawText(pOut, 10, ypos, {200, 240, 180});
+    }
+
+    if (g_pGameLevel && (Device.dwTimeGlobal - m_last_time > 500))
+    {
+        m_last_time = Device.dwTimeGlobal;
+
+        m_server_info.ResetData();
+        g_pGameLevel->GetLevelInfo(&m_server_info);
+    }
+
+    ypos = 5;
+    for (u32 i = 0; i < m_server_info.Size(); ++i)
+    {
+        DrawText(m_server_info[i].name, 10, ypos, {0,0,0});
+
+        ypos += font_height;
+        if (ypos > y_top_max)
+        {
+            break;
+        }
+    }
+}
+
+#endif
+
+#ifdef WINDOWS
+CTextConsoleWindows::CTextConsoleWindows()
 {
     m_pMainWnd = NULL;
     m_hConsoleWnd = NULL;
@@ -22,10 +161,10 @@ CTextConsole::CTextConsole()
     m_last_time = Device.dwTimeGlobal;
 }
 
-CTextConsole::~CTextConsole() { m_pMainWnd = NULL; }
+CTextConsoleWindows::~CTextConsoleWindows() { m_pMainWnd = NULL; }
 //-------------------------------------------------------------------------------------------
 LRESULT CALLBACK TextConsole_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-void CTextConsole::CreateConsoleWnd()
+void CTextConsoleWindows::CreateConsoleWnd()
 {
     HINSTANCE hInstance = (HINSTANCE)GetModuleHandle(0);
     //----------------------------------
@@ -59,7 +198,7 @@ void CTextConsole::CreateConsoleWnd()
 };
 //-------------------------------------------------------------------------------------------
 LRESULT CALLBACK TextConsole_LogWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-void CTextConsole::CreateLogWnd()
+void CTextConsoleWindows::CreateLogWnd()
 {
     HINSTANCE hInstance = (HINSTANCE)GetModuleHandle(0);
     //----------------------------------
@@ -137,7 +276,7 @@ void CTextConsole::CreateLogWnd()
     m_hBackGroundBrush = GetStockBrush(BLACK_BRUSH);
 }
 
-void CTextConsole::Initialize()
+void CTextConsoleWindows::Initialize()
 {
     inherited::Initialize();
 
@@ -167,7 +306,7 @@ void CTextConsole::Initialize()
     m_server_info.ResetData();
 }
 
-void CTextConsole::Destroy()
+void CTextConsoleWindows::Destroy()
 {
     inherited::Destroy();
 
@@ -192,8 +331,7 @@ void CTextConsole::Destroy()
     DestroyWindow(m_hConsoleWnd);
 }
 
-void CTextConsole::OnRender() {} // disable СConsole::OnRender()
-void CTextConsole::OnPaint()
+void CTextConsoleWindows::OnPaint()
 {
     RECT wRC;
     PAINTSTRUCT ps;
@@ -221,7 +359,7 @@ void CTextConsole::OnPaint()
     EndPaint(m_hLogWnd, &ps);
 }
 
-void CTextConsole::DrawLog(HDC hDC, RECT* pRect)
+void CTextConsoleWindows::DrawLog(HDC hDC, RECT* pRect)
 {
     TEXTMETRIC tm;
     GetTextMetrics(hDC, &tm);
@@ -322,13 +460,13 @@ void CTextConsole::DrawLog(HDC hDC, RECT* pRect)
     }
 }
 /*
-void CTextConsole::IR_OnKeyboardPress( int dik ) !!!!!!!!!!!!!!!!!!!!!
+void CTextConsoleWindows::IR_OnKeyboardPress( int dik ) !!!!!!!!!!!!!!!!!!!!!
 {
 m_bNeedUpdate = true;
 inherited::IR_OnKeyboardPress( dik );
 }
 */
-void CTextConsole::OnFrame()
+void CTextConsoleWindows::OnFrame()
 {
     inherited::OnFrame();
     /* if ( !m_bNeedUpdate && m_dwLastUpdateTime + 1000/g_svTextConsoleUpdateRate > Device.dwTimeGlobal )
@@ -339,3 +477,4 @@ void CTextConsole::OnFrame()
     SetCursor(LoadCursor(NULL, IDC_ARROW));
     // m_bNeedUpdate = true;
 }
+#endif

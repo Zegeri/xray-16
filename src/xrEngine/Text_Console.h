@@ -4,9 +4,51 @@
 
 class ENGINE_API CTextConsole : public CConsole
 {
-private:
+protected:
     typedef CConsole inherited;
 
+public:
+    virtual ~CTextConsole() = default;
+
+    virtual void Initialize() = 0;
+    virtual void Destroy() = 0;
+
+    virtual void OnFrame() = 0;
+
+    // virtual void IR_OnKeyboardPress (int dik);
+    virtual void OnPaint() = 0;
+
+}; // class TextConsole
+
+#ifdef LINUX
+struct _TTF_Font;
+typedef _TTF_Font TTF_Font;
+
+class CTextConsoleSDL : public CTextConsole
+{
+public:
+    CTextConsoleSDL() = default;
+    void Initialize() override;
+    void Destroy() override;
+    void OnFrame() override;
+    void OnPaint() override;
+private:
+    SDL_Window* m_window;
+    SDL_Surface* m_window_surface;
+    u32 m_background_color;
+    TTF_Font* m_font;
+
+    u32 m_last_time;
+    CServerInfo m_server_info;
+
+    void CreateConsoleWnd();
+    void DrawText(const char* text, int x, int y, SDL_Color color);
+}; // CTextConsoleSDL
+#endif
+
+#ifdef WINDOWS
+class CTextConsoleWindows : public CTextConsole
+{
 private:
     HWND* m_pMainWnd;
 
@@ -37,19 +79,18 @@ private:
 
 public:
     CTextConsole();
-    virtual ~CTextConsole();
+    ~CTextConsole();
 
-    virtual void Initialize();
-    virtual void Destroy();
+    void Initialize() override;
+    void Destroy() override;
 
-    virtual void OnRender();
-    virtual void OnFrame();
+    void OnFrame() override;
 
     // virtual void IR_OnKeyboardPress (int dik);
 
-    void AddString(LPCSTR string);
     void OnPaint();
 
-}; // class TextConsole
+}; // class CTextConsoleWindows
+#endif
 
 // extern ENGINE_API CTextConsole* TextConsole;
