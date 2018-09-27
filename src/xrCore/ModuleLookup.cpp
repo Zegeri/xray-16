@@ -36,7 +36,7 @@ void* ModuleHandle::Open(pcstr moduleName)
 #ifdef WINDOWS
         Msg("! Failed to load DLL: 0x%d", GetLastError());
 #elif defined(LINUX)
-        Msg("! Failed to load DLL: 0x%d", dlerror());
+        Msg("! Failed to load DLL: %s", dlerror());
 #endif
     }
 
@@ -61,7 +61,7 @@ void ModuleHandle::Close()
 #ifdef WINDOWS
         Msg("! Failed to close DLL: 0x%d", GetLastError());
 #elif defined(LINUX)
-        Msg("! Failed to close DLL: 0x%d", dlerror());
+        Msg("! Failed to close DLL: %s", dlerror());
 #endif
     }
 
@@ -93,7 +93,7 @@ void* ModuleHandle::GetProcAddress(pcstr procName) const
 #ifdef WINDOWS
         Msg("! Failed to load procedure [%s] from DLL: 0x%d", procName, GetLastError());
 #elif defined(LINUX)
-        Msg("! Failed to load procedure [%s] from DLL: 0x%d", procName, dlerror());
+        Msg("! Failed to load procedure [%s] from DLL: %s", procName, dlerror());
 #endif
     }
 
