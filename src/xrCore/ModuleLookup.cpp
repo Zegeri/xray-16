@@ -29,7 +29,8 @@ void* ModuleHandle::Open(pcstr moduleName)
 #ifdef WINDOWS
     handle = LoadLibraryA(moduleName);
 #elif defined(LINUX)
-    handle = dlopen(moduleName, RTLD_LAZY);
+    std::string soName = "./" + std::string(moduleName) + ".so";
+    handle = dlopen(soName.c_str(), RTLD_LAZY);
 #endif
     if (handle == nullptr)
     {
