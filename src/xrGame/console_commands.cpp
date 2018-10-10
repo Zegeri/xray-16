@@ -154,8 +154,8 @@ static void full_memory_stats()
     GEnv.Render->ResourcesGetMemoryUsage(m_base, c_base, m_lmaps, c_lmaps);
     log_vminfo();
     size_t _process_heap = ::Memory.mem_usage();
-    int _eco_strings = (int)g_pStringContainer->stat_economy();
-    int _eco_smem = (int)g_pSharedMemoryContainer->stat_economy();
+    int _eco_strings = (int)::Memory.string_container->stat_economy();
+    int _eco_smem = (int)::Memory.shared_memory_container->stat_economy();
     Msg("* [ D3D ]: textures[%d K]", (m_base + m_lmaps) / 1024);
     Msg("* [x-ray]: process heap[%u K]", _process_heap / 1024);
     Msg("* [x-ray]: economy: strings[%d K], smem[%d K]", _eco_strings / 1024, _eco_smem);

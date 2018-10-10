@@ -74,7 +74,6 @@ private:
     Lock* pcs;
     cdb container;
 };
-XRCORE_API extern smem_container* g_pSharedMemoryContainer;
 
 //////////////////////////////////////////////////////////////////////////
 template <class T>
@@ -115,7 +114,7 @@ public:
     ~ref_smem() { _dec(); }
     void create(u32 dwCRC, u32 dwLength, T* ptr)
     {
-        smem_value* v = g_pSharedMemoryContainer->dock(dwCRC, dwLength * sizeof(T), ptr);
+        smem_value* v = Memory.shared_memory_container->dock(dwCRC, dwLength * sizeof(T), ptr);
         if (0 != v)
             v->dwReference++;
         _dec();

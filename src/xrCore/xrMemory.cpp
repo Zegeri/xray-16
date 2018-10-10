@@ -9,26 +9,10 @@
 #endif
 
 xrMemory Memory;
-// Also used in src\xrCore\xrDebug.cpp to prevent use of g_pStringContainer before it initialized
-bool shared_str_initialized = false;
 
-xrMemory::xrMemory()
+xrMemory::xrMemory() :
+    stat_calls(0), string_container(new str_container()), shared_memory_container(new smem_container())
 {
-}
-
-void xrMemory::_initialize()
-{
-    stat_calls = 0;
-
-    g_pStringContainer = new str_container();
-    shared_str_initialized = true;
-    g_pSharedMemoryContainer = new smem_container();
-}
-
-void xrMemory::_destroy()
-{
-    xr_delete(g_pSharedMemoryContainer);
-    xr_delete(g_pStringContainer);
 }
 
 XRCORE_API void vminfo(size_t* _free, size_t* reserved, size_t* committed)
@@ -96,10 +80,10 @@ void xrMemory::mem_compact()
     */
     scalable_allocation_command(TBBMALLOC_CLEAN_ALL_BUFFERS, NULL);
     //HeapCompact(GetProcessHeap(), 0);
-    if (g_pStringContainer)
-        g_pStringContainer->clean();
-    if (g_pSharedMemoryContainer)
-        g_pSharedMemoryContainer->clean();
+    if (string_container)
+        string_container->clean();
+    if (shared_memory_container)
+        shared_memory_container->clean();
 
 #if defined(WINDOWS)
     if (strstr(Core.Params, "-swap_on_compact"))

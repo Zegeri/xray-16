@@ -21,8 +21,6 @@
 #include <direct.h>
 #endif
 
-extern bool shared_str_initialized;
-
 #if defined(WINDOWS)
 #ifdef __BORLANDC__
 #include "d3d9.h"
@@ -420,18 +418,14 @@ void xrDebug::GatherInfo(char* assertionInfo, size_t bufferSize, const ErrorLoca
         }
     }
     buffer += xr_sprintf(buffer, bufferSize, "\n");
-    if (shared_str_initialized)
-    {
-        Log(assertionInfo);
-        FlushLog();
-    }
+    Log(assertionInfo);
+    FlushLog();
     buffer = assertionInfo;
 #if defined(WINDOWS)
     if (IsDebuggerPresent() || !strstr(GetCommandLine(), "-no_call_stack_assert"))
         return;
 #endif
-    if (shared_str_initialized)
-        Log("stack trace:\n");
+    Log("stack trace:\n");
 #ifdef USE_OWN_ERROR_MESSAGE_WINDOW
     buffer += xr_sprintf(buffer, bufferSize, "stack trace:\n\n");
 #endif // USE_OWN_ERROR_MESSAGE_WINDOW
@@ -439,8 +433,7 @@ void xrDebug::GatherInfo(char* assertionInfo, size_t bufferSize, const ErrorLoca
     xr_vector<xr_string> stackTrace = BuildStackTrace();
     for (size_t i = 2; i < stackTrace.size(); i++)
     {
-        if (shared_str_initialized)
-            Log(stackTrace[i].c_str());
+        Log(stackTrace[i].c_str());
 #ifdef USE_OWN_ERROR_MESSAGE_WINDOW
         buffer += xr_sprintf(buffer, bufferSize, "%s\n", stackTrace[i].c_str());
 #endif // USE_OWN_ERROR_MESSAGE_WINDOW
@@ -453,15 +446,13 @@ void xrDebug::GatherInfo(char* assertionInfo, size_t bufferSize, const ErrorLoca
     if(strings)
         for (size_t i = 0; i < nptrs; i++)
         {
-            if (shared_str_initialized)
-                Log(strings[i]);
+            Log(strings[i]);
     #ifdef USE_OWN_ERROR_MESSAGE_WINDOW
             buffer += xr_sprintf(buffer, bufferSize, "%s\n", strings[i]);
     #endif // USE_OWN_ERROR_MESSAGE_WINDOW
         }
 #endif
-    if (shared_str_initialized)
-        FlushLog();
+    FlushLog();
     os_clipboard::copy_to_clipboard(assertionInfo);
 }
 
@@ -588,8 +579,8 @@ int out_of_memory_handler(size_t size)
     {
         Memory.mem_compact();
         size_t processHeap = Memory.mem_usage();
-        size_t ecoStrings = g_pStringContainer->stat_economy();
-        size_t ecoSmem = g_pSharedMemoryContainer->stat_economy();
+        size_t ecoStrings = Memory.string_container->stat_economy();
+        size_t ecoSmem = Memory.shared_memory_container->stat_economy();
         Msg("* [x-ray]: process heap[%zu K]", processHeap / 1024);
         Msg("* [x-ray]: economy: strings[%zu K], smem[%zu K]", ecoStrings / 1024, ecoSmem);
     }
@@ -705,15 +696,13 @@ LONG WINAPI xrDebug::UnhandledFilter(EXCEPTION_POINTERS* exPtrs)
         CONTEXT save = *exPtrs->ContextRecord;
         xr_vector<xr_string> stackTrace = BuildStackTrace(exPtrs->ContextRecord, 1024);
         *exPtrs->ContextRecord = save;
-        if (shared_str_initialized)
-            Msg("stack trace:\n");
+        Msg("stack trace:\n");
         if (!IsDebuggerPresent())
             os_clipboard::copy_to_clipboard("stack trace:\r\n\r\n");
         string4096 buffer;
         for (size_t i = 0; i < stackTrace.size(); i++)
         {
-            if (shared_str_initialized)
-                Log(stackTrace[i].c_str());
+            Log(stackTrace[i].c_str());
             xr_sprintf(buffer, sizeof(buffer), "%s\r\n", stackTrace[i].c_str());
 #ifdef DEBUG
             if (!IsDebuggerPresent())
@@ -722,8 +711,7 @@ LONG WINAPI xrDebug::UnhandledFilter(EXCEPTION_POINTERS* exPtrs)
         }
         if (*errMsg)
         {
-            if (shared_str_initialized)
-                Msg("\n%s", errMsg);
+            Msg("\n%s", errMsg);
             xr_strcat(errMsg, "\r\n");
 #ifdef DEBUG
             if (!IsDebuggerPresent())
@@ -731,8 +719,7 @@ LONG WINAPI xrDebug::UnhandledFilter(EXCEPTION_POINTERS* exPtrs)
 #endif
         }
     }
-    if (shared_str_initialized)
-        FlushLog();
+    FlushLog();
 #ifndef USE_OWN_ERROR_MESSAGE_WINDOW
 #ifdef USE_OWN_MINI_DUMP
     SaveMiniDump(exPtrs);

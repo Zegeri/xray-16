@@ -15,6 +15,9 @@
 #include "tbb/tbbmalloc_proxy.h"
 #endif
 
+class str_container;
+class smem_container;
+
 class XRCORE_API xrMemory
 {
     // Additional 16 bytes of memory almost like in original xr_aligned_offset_malloc
@@ -27,10 +30,10 @@ class XRCORE_API xrMemory
 
 public:
     xrMemory();
-    void _initialize();
-    void _destroy();
 
     u32 stat_calls;
+    std::unique_ptr<str_container> string_container;
+    std::unique_ptr<smem_container> shared_memory_container;
 
 public:
     size_t mem_usage();

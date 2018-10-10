@@ -239,8 +239,6 @@ void xrCore::Initialize(pcstr _ApplicationName, pcstr commandLine, LogCallback c
         GetComputerName(CompName, &sz_comp);
 #endif
 
-        Memory._initialize();
-
         SDL_LogSetOutputFunction(SDLLogOutput, nullptr);
         Msg("%s %s build %d, %s", "OpenXRay", GetBuildConfiguration(), buildId, buildDate);
         PrintBuildInfo();
@@ -314,7 +312,6 @@ void xrCore::_destroy()
             xr_delete(trained_model);
         }
         xr_free(Params);
-        Memory._destroy();
     }
 }
 
