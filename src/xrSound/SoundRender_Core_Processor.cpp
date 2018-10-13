@@ -26,6 +26,7 @@ void CSoundRender_Core::update(const Fvector& P, const Fvector& D, const Fvector
         return;
     Stats.Update.Begin();
     isLocked = true;
+    std::unique_lock sound_lock (sound_mutex);
     float new_tm = Timer.GetElapsed_sec();
     fTimer_Delta = new_tm - fTimer_Value;
     //float dt = float(Timer_Delta)/1000.f;
@@ -134,7 +135,7 @@ void CSoundRender_Core::update(const Fvector& P, const Fvector& D, const Fvector
 
     // Events
     update_events();
-
+    sound_lock.unlock();
     isLocked = false;
     Stats.Update.End();
 }

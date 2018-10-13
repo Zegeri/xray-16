@@ -3,6 +3,7 @@
 #include "SoundRender.h"
 #include "SoundRender_Environment.h"
 #include "SoundRender_Cache.h"
+#include <mutex>
 
 class CSoundRender_Core : public ISoundManager
 {
@@ -43,6 +44,7 @@ public:
     float fTimer_Value;
     float fTimer_Delta;
     sound_event* Handler;
+    std::mutex sound_mutex;
 
 protected:
     // Collider

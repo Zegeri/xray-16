@@ -51,6 +51,7 @@ void CSoundRender_Emitter::i_stop()
 
 void CSoundRender_Emitter::stop(bool isDeffered)
 {
+    std::scoped_lock sound_lock (SoundRender->sound_mutex);
     if (isDeffered)
         bStopping = TRUE;
     else
