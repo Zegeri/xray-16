@@ -137,11 +137,13 @@ void CHW::ClearRenderTargetView(GLuint pRenderTargetView, const FLOAT ColorRGBA[
     CHK_GL(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pRenderTargetView, 0));
 
     // Clear the color buffer without affecting the global state
-    glPushAttrib(GL_COLOR_BUFFER_BIT);
+
+    //glPushAttrib is deprecated. glClearBuffer might be the correct way.
+    //glPushAttrib(GL_COLOR_BUFFER_BIT);
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     glClearColor(ColorRGBA[0], ColorRGBA[1], ColorRGBA[2], ColorRGBA[3]);
     CHK_GL(glClear(GL_COLOR_BUFFER_BIT));
-    glPopAttrib();
+    //glPopAttrib();
 }
 
 void CHW::ClearDepthStencilView(GLuint pDepthStencilView, UINT ClearFlags, FLOAT Depth, UINT8 Stencil)
