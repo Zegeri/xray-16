@@ -23,6 +23,9 @@
 #include "xrEngine/profiler.h"
 #include "mt_config.h"
 #include "xrNetServer/NET_Messages.h"
+#include "luabind/luabind.hpp"
+#include "xrScriptEngine/script_engine.hpp"
+#include "xrScriptEngine/Functor.hpp"
 
 using namespace ALife;
 

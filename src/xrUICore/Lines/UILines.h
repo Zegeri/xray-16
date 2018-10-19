@@ -1,6 +1,7 @@
 #pragma once
 #include "xrUICore/Lines/UILine.h"
 #include "xrUICore/uiabstract.h"
+#include "xrUICore/ui_base.h"
 
 class XRUICORE_API CUILines : public CDeviceResetNotifier
 {

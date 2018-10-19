@@ -11,6 +11,7 @@
 #include "xrEngine/ILoadingScreen.h"
 #include "xrUICore/Static/UIStatic.h"
 #include "xrUICore/Windows/UIWindow.h"
+#include "xrUICore/ProgressBar/UIProgressBar.h"
 
 class CApplication;
 

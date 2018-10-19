@@ -1,5 +1,6 @@
 #pragma once
 #include "xrUICore/XML/UIXmlInitBase.h"
+#include "xrUICore/Hint/UIHint.h"
 
 class CUIDragDropList;
 class CUISleepStatic;

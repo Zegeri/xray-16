@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "xrAICore/Navigation/level_graph.h"
+
 IC CSpaceRestrictionAbstract::CSpaceRestrictionAbstract()
 {
     m_initialized = false;

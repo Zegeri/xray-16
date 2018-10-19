@@ -9,6 +9,7 @@
 #pragma once
 
 #include "danger_location.h"
+#include "xrCore/intrusive_ptr.h"
 
 class CAI_Stalker;
 class CCoverPoint;

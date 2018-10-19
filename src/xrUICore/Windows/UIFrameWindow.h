@@ -1,4 +1,5 @@
 #pragma once
+#include "xrUICore/ui_defs.h"
 #include "UIWindow.h"
 
 class XRUICORE_API CUIFrameWindow : public CUIWindow, public ITextureOwner

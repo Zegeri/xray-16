@@ -9,6 +9,7 @@
 #pragma once
 
 #ifndef AI_COMPILER
+#include "xrGame/ai_space.h"
 #include "xrAICore/Navigation/graph_engine.h"
 #include "xrAICore/Navigation/graph_engine_space.h"
 #endif

@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "xrAICore/Navigation/level_graph.h"
+
 IC CSpaceRestrictionBridge::CSpaceRestrictionBridge(CSpaceRestrictionBase* object)
 {
     VERIFY(object);

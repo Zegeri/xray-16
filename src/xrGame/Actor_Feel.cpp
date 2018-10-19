@@ -12,6 +12,7 @@
 #include "Grenade.h"
 #include "WeaponRPG7.h"
 #include "ExplosiveRocket.h"
+#include "xrUICore/ui_base.h"
 #include "game_cl_base.h"
 #include "Level.h"
 #include "clsid_game.h"

@@ -3,6 +3,7 @@
 #include "ActorCondition.h"
 #include "xrEngine/CameraBase.h"
 #include "xrEngine/CameraManager.h"
+#include "xrServerEntities/xrMessages.h"
 
 #include "game_cl_base.h"
 #include "ui/UIActorMenu.h"

@@ -12,6 +12,7 @@
 #include "wallmark_manager.h"
 #include "ParticlesObject.h"
 #include "xrCDB/xr_collide_defs.h"
+#include "HudSound.h"
 
 class IRender_Light;
 using BLASTED_OBJECTS_V = xr_vector<CPhysicsShellHolder*>;

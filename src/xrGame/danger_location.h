@@ -9,6 +9,7 @@
 #pragma once
 
 #include "memory_space.h"
+#include "xrCore/intrusive_ptr.h"
 
 class IGameObject;
 

@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "xrCDB/ISpatial.h"
+
 #define TEMPLATE_SPECIALIZATION \
     template <typename T\
 >

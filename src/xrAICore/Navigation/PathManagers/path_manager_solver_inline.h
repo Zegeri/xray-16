@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "xrAICore/Navigation/graph_engine_space.h"
+
 #define TEMPLATE_SPECIALIZATION                                                                                   \
     template <typename T1, typename T2, typename T3, typename T4, typename T5, bool T6, typename T7, typename T8, \
         typename _DataStorage, typename _Parameters, typename _dist_type, typename _index_type,                   \

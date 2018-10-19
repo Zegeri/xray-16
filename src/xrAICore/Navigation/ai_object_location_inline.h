@@ -9,6 +9,8 @@
 #pragma once
 
 #include "xrAICore/Navigation/level_graph.h"
+#include "xrAICore/Navigation/game_graph.h"
+#include "xrGame/ai_space.h"
 
 IC void CAI_ObjectLocation::init()
 {

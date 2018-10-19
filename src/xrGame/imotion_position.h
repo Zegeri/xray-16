@@ -3,7 +3,6 @@
 #include "interactive_motion.h"
 #include "Include/xrRender/Kinematics.h"
 class imotion_position;
-enum motion_history_state;
 class imotion_position : public interactive_motion
 {
 private:

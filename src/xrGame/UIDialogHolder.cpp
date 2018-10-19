@@ -1,4 +1,5 @@
 #include "StdAfx.h"
+#include "xrUICore/ui_base.h"
 #include "UIDialogHolder.h"
 #include "ui/UIDialogWnd.h"
 #include "UIGameCustom.h"

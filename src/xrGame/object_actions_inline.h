@@ -10,6 +10,7 @@
 
 #include "object_handler.h"
 #include "object_handler_space.h"
+#include "HudItem.h"
 
 //////////////////////////////////////////////////////////////////////////
 // CObjectActionBase
