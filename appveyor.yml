@@ -9,9 +9,9 @@ image:
 - Visual Studio 2017
 
 configuration:
-- Debug
-- Mixed
 - Release
+- Mixed
+- Debug
 
 platform:
 - x64
