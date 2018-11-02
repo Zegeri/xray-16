@@ -681,10 +681,11 @@ void CSkeletonX::_FillVerticesSoft4W(const Fmatrix& view, CSkeletonWallmark& wm,
 }
 
 #ifndef USE_DX9
-void CSkeletonX::_DuplicateIndices(const char* /*N*/, IReader* data)
+void CSkeletonX::_DuplicateIndices(const char* N, IReader* data)
 {
+    Msg("Create indices from: %s", N);
     //	We will have trouble with container since don't know were to take readable indices
-    VERIFY(!data->find_chunk(OGF_ICONTAINER));
+    R_ASSERT(!data->find_chunk(OGF_ICONTAINER));
     //	Index buffer replica since we can't read from index buffer in DX10
     // ref_smem<u16>			Indices;
     R_ASSERT(data->find_chunk(OGF_INDICES));
@@ -692,6 +693,7 @@ void CSkeletonX::_DuplicateIndices(const char* /*N*/, IReader* data)
 
     u32 size = iCount * 2;
     u32 crc = crc32(data->pointer(), size);
+    Msg("Loaded: iCount = %d, crc = %d", iCount, crc);
     m_Indices.create(crc, iCount, (u16*)data->pointer());
 }
 #endif //	USE_DX10

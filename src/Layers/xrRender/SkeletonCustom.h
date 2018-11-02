@@ -193,35 +193,35 @@ public:
     accel* LL_Bones() override { return bone_map_N; }
     ICF CBoneInstance& LL_GetBoneInstance(u16 bone_id) override
     {
-        VERIFY(bone_id < LL_BoneCount());
-        VERIFY(bone_instances);
+        R_ASSERT2(bone_id < LL_BoneCount(), make_string("%d >= %d", bone_id, LL_BoneCount()));
+        R_ASSERT(bone_instances);
         return bone_instances[bone_id];
     }
     ICF const CBoneInstance& LL_GetBoneInstance(u16 bone_id) const
     {
-        VERIFY(bone_id < LL_BoneCount());
-        VERIFY(bone_instances);
+        R_ASSERT2(bone_id < LL_BoneCount(), make_string("%d >= %d", bone_id, LL_BoneCount()));
+        R_ASSERT(bone_instances);
         return bone_instances[bone_id];
     }
     CBoneData& LL_GetData(u16 bone_id) override
     {
-        VERIFY(bone_id < LL_BoneCount());
-        VERIFY(bones);
+        R_ASSERT2(bone_id < LL_BoneCount(), make_string("%d >= %d", bone_id, LL_BoneCount()));
+        R_ASSERT(bones);
         CBoneData& bd = *((*bones)[bone_id]);
         return bd;
     }
 
     const IBoneData& GetBoneData(u16 bone_id) const override
     {
-        VERIFY(bone_id < LL_BoneCount());
-        VERIFY(bones);
+        R_ASSERT2(bone_id < LL_BoneCount(), make_string("%d >= %d", bone_id, LL_BoneCount()));
+        R_ASSERT(bones);
         CBoneData& bd = *((*bones)[bone_id]);
         return bd;
     }
     CBoneData* LL_GetBoneData(u16 bone_id)
     {
-        VERIFY(bone_id < LL_BoneCount());
-        VERIFY(bones);
+        R_ASSERT2(bone_id < LL_BoneCount(), make_string("%d >= %d", bone_id, LL_BoneCount()));
+        R_ASSERT(bones);
         u32 sz = sizeof(vecBones);
         u32 sz1 = sizeof(((*bones)[bone_id])->children);
         Msg("sz: %d", sz);

@@ -7,7 +7,7 @@
 #include <tbb/parallel_for.h>
 #include <tbb/parallel_sort.h>
 
-//#define DEBUG_SCHEDULER
+#define DEBUG_SCHEDULER
 //#define DEBUG_SCHEDULERMT
 
 float psShedulerCurrent = 10.f;
@@ -359,6 +359,8 @@ void CSheduler::ProcessStep()
         clamp(dwUpdate, u32(_max(dwMin, u32(20))), dwMax);
 
         m_current_step_obj = item.Object;
+
+        R_ASSERT(item.Object);
 
         item.Object->shedule_Update(
             clampr(Elapsed, u32(1), u32(_max(u32(item.Object->GetSchedulerData().t_max), u32(1000)))));
@@ -789,11 +791,14 @@ void Scheduler::ProcessUpdateQueue()
     CTimer eTimer;
 
     tbb::parallel_sort(UpdateQueue.begin(), UpdateQueue.end(), std::less<Item>());
-
+#if 0
     tbb::parallel_for(tbb::blocked_range<size_t>(0, UpdateQueue.size()), [&](const tbb::blocked_range<size_t>& range)
     {
         for (size_t i = range.begin(); i < range.end(); ++i)
         {
+#else
+        for (int i = 0; i < UpdateQueue.size(); ++i) {
+#endif
             auto item = UpdateQueue[i];
 
             if (item.TimeForExecute < dwTime)
@@ -869,7 +874,9 @@ void Scheduler::ProcessUpdateQueue()
                 break;
             }
         }
+#if 0
     });
+#endif
 
     tbb::parallel_sort(UpdateQueue.begin(), UpdateQueue.end(), std::less<Item>());
 

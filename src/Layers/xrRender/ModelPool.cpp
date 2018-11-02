@@ -106,14 +106,16 @@ dxRender_Visual* CModelPool::Instance_Load(const char* N, BOOL allow_register)
     }
 
 // Actual loading
-#ifdef DEBUG
+//#ifdef DEBUG
     if (bLogging)
         Msg("- Uncached model loading: %s", fn);
-#endif // DEBUG
+//#endif // DEBUG
 
     IReader* data = FS.r_open(fn);
+    R_ASSERT(data);
     ogf_header H;
     data->r_chunk_safe(OGF_HEADER, &H, sizeof(H));
+    Msg("- Version: %d. Id: %d.", H.format_version, H.shader_id);
     V = Instance_Create(H.type);
     V->Load(N, data, 0);
     FS.r_close(data);

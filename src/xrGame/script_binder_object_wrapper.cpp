@@ -59,6 +59,7 @@ void CScriptBinderObjectWrapper::net_Export_static(CScriptBinderObject* script_b
 
 void CScriptBinderObjectWrapper::shedule_Update(u32 time_delta)
 {
+    Msg("Updating binded object %s", m_object->Name());
     luabind::call_member<void>(this, "update", time_delta);
 }
 

@@ -25,7 +25,7 @@ include_directories(
 
 add_definitions(-DXRAICORE_EXPORTS -D_SECURE_SCL=0)
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}__SOURCES} ${${PROJECT_NAME}__INCLUDES})
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3")
 set_target_properties(${PROJECT_NAME} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "pch.hpp")
 cotire(${PROJECT_NAME})
 

@@ -158,8 +158,10 @@ bool pred_sort_P(const std::pair<shared_str, u32>& A, const std::pair<shared_str
 
 CSkeletonX* CKinematics::LL_GetChild(u32 idx)
 {
+    Msg("LL_GetChild %d", idx);
     IRenderVisual* V = children[idx];
     CSkeletonX* B = dynamic_cast<CSkeletonX*>(V);
+    Msg("LL_GetChild ok");
     return B;
 }
 
@@ -226,7 +228,7 @@ void CKinematics::Load(const char* N, IReader* data, u32 dwFlags)
 
     visimask.zero();
     int dwCount = data->r_u32();
-    //Msg("!!! %d bones", dwCount);
+    Msg("!!! %d bones", dwCount);
     //if (dwCount>=64)
     //    Msg("!!! More than 64 bones is a crazy thing! (%d), %s", dwCount, N);
     VERIFY3(dwCount <= 64, "More than 64 bones is a crazy thing!", N);

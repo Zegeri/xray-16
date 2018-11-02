@@ -14,14 +14,11 @@
 CALifeObjectRegistry::CALifeObjectRegistry(LPCSTR section) {}
 CALifeObjectRegistry::~CALifeObjectRegistry()
 {
-    OBJECT_REGISTRY::iterator const B = m_objects.begin();
-    OBJECT_REGISTRY::iterator I = B;
-    OBJECT_REGISTRY::iterator const E = m_objects.end();
-    for (; I != E; ++I)
-        (*I).second->on_unregister();
+    for (auto& [id, object] : m_objects)
+        object->on_unregister();
 
-    for (I = B; I != E; ++I)
-        xr_delete((*I).second);
+    for (auto& [id, object] : m_objects)
+        xr_delete(object);
 }
 
 void CALifeObjectRegistry::save(IWriter& memory_stream, CSE_ALifeDynamicObject* object, u32& object_count)
@@ -41,11 +38,9 @@ void CALifeObjectRegistry::save(IWriter& memory_stream, CSE_ALifeDynamicObject* 
     memory_stream.w_u16(u16(tNetPacket.B.count));
     memory_stream.w(tNetPacket.B.data, tNetPacket.B.count);
 
-    ALife::OBJECT_VECTOR::const_iterator I = object->children.begin();
-    ALife::OBJECT_VECTOR::const_iterator E = object->children.end();
-    for (; I != E; ++I)
+    for (const auto& child_object : object->children)
     {
-        CSE_ALifeDynamicObject* child = this->object(*I, true);
+        CSE_ALifeDynamicObject* child = this->object(child_object, true);
         if (!child)
             continue;
 
@@ -65,20 +60,18 @@ void CALifeObjectRegistry::save(IWriter& memory_stream)
     memory_stream.w_u32(u32(-1));
 
     u32 object_count = 0;
-    OBJECT_REGISTRY::iterator I = m_objects.begin();
-    OBJECT_REGISTRY::iterator E = m_objects.end();
-    for (; I != E; ++I)
+    for (auto& [id, object] : m_objects)
     {
-        if (!(*I).second->can_save())
+        if (!object->can_save())
             continue;
 
-        if ((*I).second->redundant())
+        if (object->redundant())
             continue;
 
-        if ((*I).second->ID_Parent != 0xffff)
+        if (object->ID_Parent != 0xffff)
             continue;
 
-        save(memory_stream, (*I).second, object_count);
+        save(memory_stream, object, object_count);
     }
 
     u32 last_position = memory_stream.tell();

@@ -378,6 +378,7 @@ void CSkeletonX_ST::Load(const char* N, IReader* data, u32 dwFlags)
 
 void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
 {
+    Msg("_Load_hw");
     // Create HW VB in case this is possible
     //BOOL bSoft = HW.Caps.geometry.bSoftware;
     // VB may be read by wallmarks code
@@ -385,12 +386,13 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
     switch (RenderMode)
     {
     case RM_SKINNING_SOFT:
-        //Msg("skinning: software");
+        Msg("skinning: software");
         V.rm_geom.create(vertRenderFVF, RCache.Vertex.Buffer(), V.p_rm_Indices);
         break;
     case RM_SINGLE:
     case RM_SKINNING_1B:
     {
+        Msg("skinning: RM_SKINNING_1B");
         { // Back up vertex data since we can't read vertex buffer in DX10
             u32 size = V.vCount * sizeof(vertBoned1W);
             u32 crc = crc32(_verts_, size);
@@ -402,9 +404,9 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
 #else
         u32 vStride = D3DXGetDeclVertexSize(dwDecl_01W, 0);
 #endif // USE_OGL
-        VERIFY(vStride == sizeof(vertHW_1W));
+        R_ASSERT(vStride == sizeof(vertHW_1W));
         //BYTE* bytes = 0;
-        VERIFY(NULL == V.p_rm_Vertices);
+        R_ASSERT(NULL == V.p_rm_Vertices);
 
         //R_CHK
         //(HW.pDevice->CreateVertexBuffer(V.vCount*vStride, dwUsage, 0, D3DPOOL_MANAGED, &V.p_rm_Vertices, 0));
@@ -447,6 +449,7 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
     break;
     case RM_SKINNING_2B:
     {
+        Msg("skinning: RM_SKINNING_2B");
         { // Back up vertex data since we can't read vertex buffer in DX10
             u32 size = V.vCount * sizeof(vertBoned2W);
             u32 crc = crc32(_verts_, size);
@@ -458,9 +461,9 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
 #else
         u32 vStride = D3DXGetDeclVertexSize(dwDecl_2W, 0);
 #endif
-        VERIFY(vStride == sizeof(vertHW_2W));
+        R_ASSERT(vStride == sizeof(vertHW_2W));
         // BYTE* bytes = 0;
-        VERIFY(NULL == V.p_rm_Vertices);
+        R_ASSERT(NULL == V.p_rm_Vertices);
 
         //R_CHK
         //(HW.pDevice->CreateVertexBuffer(V.vCount*vStride, dwUsage, 0, D3DPOOL_MANAGED, &V.p_rm_Vertices, 0));
@@ -501,6 +504,7 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
     break;
     case RM_SKINNING_3B:
     {
+        Msg("skinning: RM_SKINNING_3B");
         { // Back up vertex data since we can't read vertex buffer in DX10
             u32 size = V.vCount * sizeof(vertBoned3W);
             u32 crc = crc32(_verts_, size);
@@ -511,9 +515,9 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
 #else
         u32 vStride = D3DXGetDeclVertexSize(dwDecl_3W, 0);
 #endif // USE_OGL
-        VERIFY(vStride == sizeof(vertHW_3W));
+        R_ASSERT(vStride == sizeof(vertHW_3W));
         //BYTE* bytes = 0;
-        VERIFY(NULL == V.p_rm_Vertices);
+        R_ASSERT(NULL == V.p_rm_Vertices);
 
         //R_CHK
         //(HW.pDevice->CreateVertexBuffer(V.vCount*vStride, dwUsage, 0, D3DPOOL_MANAGED, &V.p_rm_Vertices, 0));
@@ -557,6 +561,7 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
     break;
     case RM_SKINNING_4B:
     {
+        Msg("skinning: RM_SKINNING_4B");
         { // Back up vertex data since we can't read vertex buffer in DX10
             u32 size = V.vCount * sizeof(vertBoned4W);
             u32 crc = crc32(_verts_, size);
@@ -568,9 +573,9 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
 #else
         u32 vStride = D3DXGetDeclVertexSize(dwDecl_4W, 0);
 #endif
-        VERIFY(vStride == sizeof(vertHW_4W));
+        R_ASSERT(vStride == sizeof(vertHW_4W));
         //BYTE* bytes = 0;
-        VERIFY(NULL == V.p_rm_Vertices);
+        R_ASSERT(NULL == V.p_rm_Vertices);
 
         //R_CHK
         //(HW.pDevice->CreateVertexBuffer(V.vCount*vStride, dwUsage, 0, D3DPOOL_MANAGED, &V.p_rm_Vertices, 0));
@@ -611,6 +616,8 @@ void CSkeletonX_ext::_Load_hw(Fvisual& V, void* _verts_)
         V.rm_geom.create(dwDecl_4W, V.p_rm_Vertices, V.p_rm_Indices);
     }
     break;
+    default:
+        Msg("skinning: RM_SKINNING_UNKNOWN");
     }
 }
 
@@ -763,9 +770,11 @@ static void verify_vertex(const vertex_type& v, const Fvisual* V, const CKinemat
 
 void CSkeletonX_ext::_CollectBoneFaces(Fvisual* V, u32 iBase, u32 iCount)
 {
+    Msg("CSkeletonX_ext::_CollectBoneFaces: %d, %d", iBase, iCount);
     u16* indices = nullptr;
 
 #ifndef USE_DX9
+    R_ASSERT(m_Indices);
     indices = *m_Indices;
 #else // USE_DX10
     R_CHK(V->p_rm_Indices->Lock(0, V->dwPrimitives * 3, (void**)&indices, D3DLOCK_READONLY));
@@ -812,10 +821,23 @@ void CSkeletonX_ext::_CollectBoneFaces(Fvisual* V, u32 iBase, u32 iCount)
             vertBoned3W* vertices = *Vertices3W;
             for (u32 idx = 0; idx < iCount; ++idx)
             {
+                R_ASSERT(Parent);
+                R_ASSERT(V);
+                R_ASSERT(vertices);
+                Msg("Bone V->vBase = %d, idx = %d, indices[idx] = %d, total = %d",
+                    V->vBase,
+                    idx,
+                    indices[idx],
+                    V->vBase + indices[idx]);
                 vertBoned3W& v = vertices[V->vBase + indices[idx]];
 #ifdef DEBUG
                 verify_vertex(v, V, Parent, iBase, iCount, indices, V->vBase + indices[idx], idx);
 #endif
+                Msg("v.get_bone_id(i): %d, Parent->LL_BoneCount() %d ", 0, Parent->LL_BoneCount());
+                Msg("&v: %p, &V: %p, indices: %p", &v, V, indices);
+                Msg(" iBase: %d, iCount: %d, V->iBase %d, V->iCount %d, "
+                    "V->vBase: %d, V->vCount %d, vertex_idx: %d, idx: %d",
+                    iBase, iCount, V->iBase, V->iCount, V->vBase, V->vCount,  V->vBase + indices[idx], idx);
                 CBoneData& BD0 = Parent->LL_GetData((u16)v.m[0]);
                 BD0.AppendFace(ChildIDX, (u16)(idx / 3));
                 CBoneData& BD1 = Parent->LL_GetData((u16)v.m[1]);
@@ -1376,7 +1398,8 @@ void CSkeletonX_ext::_FillVerticesHW4W(const Fmatrix& view, CSkeletonWallmark& w
 void CSkeletonX_ext::_FillVertices(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal,
                                    float size, Fvisual* V, u16 bone_id, u32 iBase, u32 /*iCount*/)
 {
-    VERIFY(Parent && ChildIDX != u16(-1));
+    Msg("CSkeletonX_ext::_FillVertices");
+    R_ASSERT(Parent && ChildIDX != u16(-1));
     CBoneData& BD = Parent->LL_GetData(bone_id);
     CBoneData::FacesVec* faces = &BD.child_faces[ChildIDX];
     u16* indices = nullptr;
@@ -1540,7 +1563,8 @@ void TEnumBoneVertices(
 
 void CSkeletonX_ext::_EnumBoneVertices(SEnumVerticesCallback& C, Fvisual* V, u16 bone_id, u32 iBase, u32 /*iCount*/) const
 {
-    VERIFY(Parent && ChildIDX != u16(-1));
+    Msg("EnumBoneVertices %d, %d", bone_id, iBase);
+    R_ASSERT(Parent && ChildIDX != u16(-1));
     CBoneData& BD = Parent->LL_GetData(bone_id);
     CBoneData::FacesVec* faces = &BD.child_faces[ChildIDX];
     u16* indices = nullptr;

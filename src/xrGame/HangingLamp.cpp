@@ -16,7 +16,7 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CHangingLamp::CHangingLamp() { Init(); }
+CHangingLamp::CHangingLamp() : fBrightness(0) { Init(); }
 CHangingLamp::~CHangingLamp() {}
 void CHangingLamp::Init()
 {

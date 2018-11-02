@@ -136,6 +136,8 @@ void CGameTask::ChangeMapLocation(LPCSTR new_map_location, u16 new_map_object_id
 void CGameTask::ChangeStateCallback() { Actor()->callback(GameObject::eTaskStateChange)(this, GetTaskState()); }
 ETaskState CGameTask::UpdateState()
 {
+    if (m_Title != nullptr)
+        Msg("State %s", m_Title.c_str());
     if ((m_ReceiveTime != m_TimeToComplete))
     {
         if (Level().GetGameTime() > m_TimeToComplete)

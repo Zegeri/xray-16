@@ -10,6 +10,7 @@
 #include "FTreeVisual.h"
 #include "xrEngine/GameFont.h"
 #include "xrEngine/PerformanceAlert.hpp"
+#include <mutex>
 
 using namespace R_dsgraph;
 
@@ -56,7 +57,7 @@ void D3DXRenderBase::r_dsgraph_insert_dynamic(dxRender_Visual* pVisual, Fvector&
     // Distortive geometry should be marked and R2 special-cases it
     // a) Allow to optimize RT order
     // b) Should be rendered to special distort buffer in another pass
-    VERIFY(pVisual->shader._get());
+    R_ASSERT(pVisual->shader._get());
     ShaderElement* sh_d = &*pVisual->shader->E[4]; // 4=L_special
     if (RImplementation.o.distortion && sh_d && sh_d->flags.bDistort && pmask[sh_d->flags.iPriority / 2])
     {
@@ -220,7 +221,7 @@ void D3DXRenderBase::r_dsgraph_insert_static(dxRender_Visual* pVisual)
     // Distortive geometry should be marked and R2 special-cases it
     // a) Allow to optimize RT order
     // b) Should be rendered to special distort buffer in another pass
-    VERIFY(pVisual->shader._get());
+    R_ASSERT(pVisual->shader._get());
     ShaderElement* sh_d = &*pVisual->shader->E[4]; // 4=L_special
     if (RImplementation.o.distortion && sh_d && sh_d->flags.bDistort && pmask[sh_d->flags.iPriority / 2])
     {
@@ -294,6 +295,8 @@ void D3DXRenderBase::r_dsgraph_insert_static(dxRender_Visual* pVisual)
         auto &Ncs = Nps[pass.constants._get()];
 #endif
         auto &Nstate = Ncs[&*pass.state];
+        R_ASSERT(pass.T);
+        R_ASSERT(pass.T._get());
         auto &Ntex = Nstate[pass.T._get()];
         Ntex.push_back(item);
 
@@ -428,6 +431,7 @@ void CRender::add_leafs_Dynamic(dxRender_Visual* pVisual)
 
 void CRender::add_leafs_Static(dxRender_Visual* pVisual)
 {
+    static std::mutex insert_static_mutex;
     if (!HOM.visible(pVisual->vis))
         return;
 
@@ -508,11 +512,13 @@ void CRender::add_leafs_Static(dxRender_Visual* pVisual)
     case MT_TREE_ST:
     {
         // General type of visual
+        std::lock_guard insert_static_lock(insert_static_mutex);
         r_dsgraph_insert_static(pVisual);
     }
         return;
     default:
     {
+        std::lock_guard insert_static_lock(insert_static_mutex);
         // General type of visual
         r_dsgraph_insert_static(pVisual);
     }
@@ -930,7 +936,7 @@ void D3DXRenderBase::overdrawBegin()
 {
 #ifndef USE_DX9
     //  TODO: DX10: Implement overdrawBegin
-    VERIFY(!"D3DXRenderBase::overdrawBegin not implemented.");
+    R_ASSERT(!"D3DXRenderBase::overdrawBegin not implemented.");
 #else
     // Turn stenciling
     CHK_DX(HW.pDevice->SetRenderState(D3DRS_STENCILENABLE, TRUE));
@@ -952,7 +958,7 @@ void D3DXRenderBase::overdrawEnd()
 {
 #ifndef USE_DX9
     // TODO: DX10: Implement overdrawEnd
-    VERIFY(!"D3DXRenderBase::overdrawEnd not implemented.");
+    R_ASSERT(!"D3DXRenderBase::overdrawEnd not implemented.");
 #else
     // Set up the stencil states
     CHK_DX(HW.pDevice->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_KEEP));
@@ -1056,7 +1062,7 @@ void DoAsyncScreenshot();
 
 void D3DXRenderBase::End()
 {
-    VERIFY(HW.pDevice);
+    R_ASSERT(HW.pDevice);
     if (HW.Caps.SceneMode)
         overdrawEnd();
     RCache.OnFrameEnd();

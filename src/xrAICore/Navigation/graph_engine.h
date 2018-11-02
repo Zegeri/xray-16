@@ -13,17 +13,20 @@
 #include "xrAICore/Navigation/vertex_manager_fixed.h"
 #include "xrAICore/Navigation/vertex_allocator_fixed.h"
 #include "xrAICore/Navigation/data_storage_bucket_list.h"
-#include "xrAICore/Navigation/PathManagers/path_manager.h"
 #include "xrAICore/Navigation/graph_engine_space.h"
 #ifndef AI_COMPILER
 #include "xrAICore/Navigation/vertex_manager_hash_fixed.h"
 #include "xrAICore/Navigation/data_storage_binary_heap.h"
 #endif
 #include "xrEngine/profiler.h"
-#include "xrAICore/Components/problem_solver.h"
 #include "xrAICore/Components/operator_condition.h"
 #include "xrAICore/Components/condition_state.h"
 #include "xrAICore/Components/operator_abstract.h"
+
+#ifndef AI_COMPILER
+template<typename T1, typename T2, typename T3, typename T4, typename T5, bool T6, typename T7, typename T8>
+class CProblemSolver;
+#endif
 
 namespace hash_fixed_vertex_manager
 {

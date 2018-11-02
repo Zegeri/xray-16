@@ -629,6 +629,7 @@ HRESULT CRender::shader_compile(LPCSTR name, IReader* fs, LPCSTR pFunctionName,
 
     if ((GLboolean)status == GL_FALSE)
     {
+#define DEBUG
 #ifdef DEBUG
         GLint srcLen;
         CHK_GL(glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH, &srcLen));

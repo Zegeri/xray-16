@@ -17,7 +17,7 @@ class ENGINE_API CLAItem;
 
 class CEnvironment;
 
-struct SThunderboltDesc
+struct ENGINE_API SThunderboltDesc
 {
     // geom
     // IRender_DetailModel* l_model;

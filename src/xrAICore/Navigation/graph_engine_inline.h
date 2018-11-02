@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "xrAICore/Navigation/PathManagers/path_manager.h"
+
 inline CGraphEngine::CGraphEngine(u32 max_vertex_count)
 {
     m_algorithm = new CAlgorithm(max_vertex_count);

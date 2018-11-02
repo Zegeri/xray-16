@@ -515,6 +515,7 @@ public:
     CCC_ALifeSave(LPCSTR N) : IConsole_Command(N) { bEmptyArgsHandled = true; };
     virtual void Execute(LPCSTR args)
     {
+#ifndef LINUX // FIXME!!!
 #if 0
         if (!Level().autosave_manager().ready_for_autosave()) {
             Msg		("! Cannot save the game right now!");
@@ -584,6 +585,7 @@ public:
 #ifdef DEBUG
         Msg("Screenshot overhead : %f milliseconds", timer.GetElapsed_sec() * 1000.f);
 #endif
+#endif // LINUX
     } // virtual void Execute
 
     virtual void fill_tips(vecTips& tips, u32 mode) { get_files_list(tips, "$game_saves$", SAVE_EXTENSION); }

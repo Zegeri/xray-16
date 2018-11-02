@@ -733,6 +733,7 @@ void CKinematicsAnimated::Load(const char* N, IReader* data, u32 dwFlags)
             _GetItem(items_nm, k, nm);
             xr_strcat(nm, ".omf");
             string_path fn;
+            Msg("- Loading motion file (1) '%s'.", nm);
             if (!FS.exist(fn, "$level$", nm))
             {
                 if (!FS.exist(fn, "$game_meshes$", nm))
@@ -773,6 +774,7 @@ void CKinematicsAnimated::Load(const char* N, IReader* data, u32 dwFlags)
             data->r_stringZ(nm, sizeof(nm));
             xr_strcat(nm, ".omf");
             string_path fn;
+            Msg("- Loading motion file (2) '%s'.", nm);
             if (!FS.exist(fn, "$level$", nm))
             {
                 if (!FS.exist(fn, "$game_meshes$", nm))
@@ -808,6 +810,7 @@ void CKinematicsAnimated::Load(const char* N, IReader* data, u32 dwFlags)
         string_path nm;
         strconcat(sizeof(nm), nm, N, ".ogf");
         m_Motions.push_back(SMotionsSlot());
+        Msg("- Loading motion file (3) '%s'.", nm);
         m_Motions.back().motions.create(nm, data, bones);
     }
 
