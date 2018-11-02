@@ -9,7 +9,7 @@ struct vf
 };
 
 layout(location = POSITION)		in float4	v_model_P		; // POSITION;		// (float,float,float,1)
-#ifdef	SKIN_0
+#if defined(SKIN_NONE) || defined(SKIN_0)
 layout(location = NORMAL)		in float3	v_model_N		; // NORMAL;		// (nx,ny,nz)
 #else
 layout(location = NORMAL)		in float4	v_model_N		; // NORMAL;		// (nx,ny,nz,index)
