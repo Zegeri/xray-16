@@ -18,7 +18,7 @@ public:
 public:
     IC CParticleParams(const Fvector& tPositionOffset = Fvector().set(0, 0, 0),
         const Fvector& tAnglesOffset = Fvector().set(0, 0, 0), const Fvector& tVelocity = Fvector().set(0, 0, 0));
-    virtual ~CParticleParams();
+    virtual ~CParticleParams() = default;
     IC void initialize();
 };
 

@@ -34,7 +34,7 @@ public:
 public:
     IC CScriptEntityAction();
     IC CScriptEntityAction(const CScriptEntityAction* entity_action);
-    virtual ~CScriptEntityAction();
+    virtual ~CScriptEntityAction() = default;
     template <typename T>
     IC void SetAction(const T& t, T& tt);
     IC void SetAction(CScriptMovementAction& tMovementAction);

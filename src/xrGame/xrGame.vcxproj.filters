@@ -4329,9 +4329,6 @@
     <ClInclude Include="stalker_property_evaluators.h">
       <Filter>AI\AMonsters\humans\stalker\DecisionMaker\properties</Filter>
     </ClInclude>
-    <ClInclude Include="stalker_property_evaluators_inline.h">
-      <Filter>AI\AMonsters\humans\stalker\DecisionMaker\properties</Filter>
-    </ClInclude>
     <ClInclude Include="stalker_movement_manager_space.h">
       <Filter>AI\AMonsters\humans\stalker\MovementManager</Filter>
     </ClInclude>
@@ -4582,9 +4579,6 @@
       <Filter>ScriptClasses\BaseClientClasses</Filter>
     </ClInclude>
     <ClInclude Include="script_particles.h">
-      <Filter>ScriptClasses\ScriptParticles</Filter>
-    </ClInclude>
-    <ClInclude Include="script_particles_inline.h">
       <Filter>ScriptClasses\ScriptParticles</Filter>
     </ClInclude>
     <ClInclude Include="script_sound.h">
@@ -5880,9 +5874,6 @@
     <ClInclude Include="xrGameSpyServer.h">
       <Filter>Core\Server\xrGameSpyServer</Filter>
     </ClInclude>
-    <ClInclude Include="xrGameSpyServer_callbacks.h">
-      <Filter>Core\Server\xrGameSpyServer</Filter>
-    </ClInclude>
     <ClInclude Include="file_transfer.h">
       <Filter>Core\Server\filetransfer</Filter>
     </ClInclude>
@@ -5975,9 +5966,6 @@
     </ClInclude>
     <ClInclude Include="ui\UITalkWnd.h">
       <Filter>UI\Common\TALK</Filter>
-    </ClInclude>
-    <ClInclude Include="ui\UICarPanel.h">
-      <Filter>UI\Common\MainIngame</Filter>
     </ClInclude>
     <ClInclude Include="ui\UIHudStatesWnd.h">
       <Filter>UI\Common\MainIngame</Filter>
@@ -6513,9 +6501,6 @@
     </ClCompile>
     <ClCompile Include="danger_manager.cpp">
       <Filter>AI\AComponents\MemoryManager\clsuterized_data_managers\DangerManager</Filter>
-    </ClCompile>
-    <ClCompile Include="danger_object.cpp">
-      <Filter>AI\AComponents\MemoryManager\clsuterized_data_managers\DangerManager\danger_object</Filter>
     </ClCompile>
     <ClCompile Include="enemy_manager.cpp">
       <Filter>AI\AComponents\MemoryManager\clsuterized_data_managers\EnemyManager</Filter>
@@ -7360,9 +7345,6 @@
     <ClCompile Include="ai\Monsters\Pseudodog\pseudodog.cpp">
       <Filter>AI\AMonsters\monsters\PseudoDog</Filter>
     </ClCompile>
-    <ClCompile Include="ai\Monsters\Pseudodog\pseudodog_psi_effector.cpp">
-      <Filter>AI\AMonsters\monsters\PseudoDog</Filter>
-    </ClCompile>
     <ClCompile Include="ai\Monsters\Pseudodog\pseudodog_state_manager.cpp">
       <Filter>AI\AMonsters\monsters\PseudoDog</Filter>
     </ClCompile>
@@ -7636,9 +7618,6 @@
     <ClCompile Include="script_watch_action_script.cpp">
       <Filter>ScriptClasses\ScriptActions\script_watch_action</Filter>
     </ClCompile>
-    <ClCompile Include="script_animation_action.cpp">
-      <Filter>ScriptClasses\ScriptActions\acript_animation_action</Filter>
-    </ClCompile>
     <ClCompile Include="script_animation_action_script.cpp">
       <Filter>ScriptClasses\ScriptActions\acript_animation_action</Filter>
     </ClCompile>
@@ -7654,9 +7633,6 @@
     <ClCompile Include="script_particle_action_script.cpp">
       <Filter>ScriptClasses\ScriptActions\script_particle_action</Filter>
     </ClCompile>
-    <ClCompile Include="particle_params.cpp">
-      <Filter>ScriptClasses\ScriptActions\script_particle_action\particle_params</Filter>
-    </ClCompile>
     <ClCompile Include="particle_params_script.cpp">
       <Filter>ScriptClasses\ScriptActions\script_particle_action\particle_params</Filter>
     </ClCompile>
@@ -7666,9 +7642,6 @@
     <ClCompile Include="script_object_action_script.cpp">
       <Filter>ScriptClasses\ScriptActions\script_object_action</Filter>
     </ClCompile>
-    <ClCompile Include="script_action_condition.cpp">
-      <Filter>ScriptClasses\ScriptActions\script_action_condition</Filter>
-    </ClCompile>
     <ClCompile Include="script_action_condition_script.cpp">
       <Filter>ScriptClasses\ScriptActions\script_action_condition</Filter>
     </ClCompile>
@@ -7677,9 +7650,6 @@
     </ClCompile>
     <ClCompile Include="script_monster_action_script.cpp">
       <Filter>ScriptClasses\ScriptActions\script_monster_action</Filter>
-    </ClCompile>
-    <ClCompile Include="script_entity_action.cpp">
-      <Filter>ScriptClasses\ScriptActions\script_entity_action</Filter>
     </ClCompile>
     <ClCompile Include="script_entity_action_script.cpp">
       <Filter>ScriptClasses\ScriptActions\script_entity_action</Filter>
@@ -7749,9 +7719,6 @@
     </ClCompile>
     <ClCompile Include="script_game_object_use2.cpp">
       <Filter>ScriptClasses\ScriptGameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="script_hit.cpp">
-      <Filter>ScriptClasses\ScriptHit</Filter>
     </ClCompile>
     <ClCompile Include="script_hit_script.cpp">
       <Filter>ScriptClasses\ScriptHit</Filter>
@@ -7843,9 +7810,6 @@
     <ClCompile Include="ActorEffector_script.cpp">
       <Filter>Core\Client\Effectors\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="CameraEffector.cpp">
-      <Filter>Core\Client\Effectors\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="EffectorBobbing.cpp">
       <Filter>Core\Client\Effectors\Actor</Filter>
     </ClCompile>
@@ -7892,9 +7856,6 @@
       <Filter>Core\Client\Level</Filter>
     </ClCompile>
     <ClCompile Include="Level_load.cpp">
-      <Filter>Core\Client\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="level_map_locations.cpp">
       <Filter>Core\Client\Level</Filter>
     </ClCompile>
     <ClCompile Include="Level_network.cpp">
@@ -8039,9 +8000,6 @@
       <Filter>Core\Client\Objects\actor\base</Filter>
     </ClCompile>
     <ClCompile Include="actor_script.cpp">
-      <Filter>Core\Client\Objects\actor\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor_Sleep.cpp">
       <Filter>Core\Client\Objects\actor\base</Filter>
     </ClCompile>
     <ClCompile Include="Actor_Weapon.cpp">
@@ -8350,12 +8308,6 @@
     <ClCompile Include="WeaponFN2000.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Various weapons\FN2000</Filter>
     </ClCompile>
-    <ClCompile Include="WeaponHPSA.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Various weapons\HPSA</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponPM.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Various weapons\PM</Filter>
-    </ClCompile>
     <ClCompile Include="WeaponBinoculars.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Various weapons\Binocular</Filter>
     </ClCompile>
@@ -8394,12 +8346,6 @@
     </ClCompile>
     <ClCompile Include="GraviArtifact.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Artifacts\GraviArtifact</Filter>
-    </ClCompile>
-    <ClCompile Include="BlackDrops.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Artifacts\BlackDrops</Filter>
-    </ClCompile>
-    <ClCompile Include="Needles.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Artifacts\Needles</Filter>
     </ClCompile>
     <ClCompile Include="BastArtifact.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Artifacts\BastArtifact</Filter>
@@ -8464,16 +8410,7 @@
     <ClCompile Include="PDA.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\PDA &amp; information</Filter>
     </ClCompile>
-    <ClCompile Include="antirad.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
-    </ClCompile>
     <ClCompile Include="BottleItem.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
-    </ClCompile>
-    <ClCompile Include="FoodItem.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
-    </ClCompile>
-    <ClCompile Include="medkit.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
     </ClCompile>
     <ClCompile Include="ActorHelmet.cpp">
@@ -8483,15 +8420,6 @@
       <Filter>Core\Client\Objects\items &amp; weapons\Outfit</Filter>
     </ClCompile>
     <ClCompile Include="CustomOutfit.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Outfit</Filter>
-    </ClCompile>
-    <ClCompile Include="ExoOutfit.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Outfit</Filter>
-    </ClCompile>
-    <ClCompile Include="MilitaryOutfit.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Outfit</Filter>
-    </ClCompile>
-    <ClCompile Include="ScientificOutfit.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Outfit</Filter>
     </ClCompile>
     <ClCompile Include="StalkerOutfit.cpp">
@@ -8553,9 +8481,6 @@
     </ClCompile>
     <ClCompile Include="CustomZone.cpp">
       <Filter>Core\Client\Objects\zones\CustomZone</Filter>
-    </ClCompile>
-    <ClCompile Include="FryupZone.cpp">
-      <Filter>Core\Client\Objects\zones\FryUpZone</Filter>
     </ClCompile>
     <ClCompile Include="GraviZone.cpp">
       <Filter>Core\Client\Objects\zones\GraviZone</Filter>
@@ -9169,9 +9094,6 @@
     <ClCompile Include="xrGameSpyServer.cpp">
       <Filter>Core\Server\xrGameSpyServer</Filter>
     </ClCompile>
-    <ClCompile Include="xrGameSpyServer_callbacks.cpp">
-      <Filter>Core\Server\xrGameSpyServer</Filter>
-    </ClCompile>
     <ClCompile Include="file_transfer.cpp">
       <Filter>Core\Server\filetransfer</Filter>
     </ClCompile>
@@ -9276,9 +9198,6 @@
     </ClCompile>
     <ClCompile Include="ui\UITalkWnd.cpp">
       <Filter>UI\Common\TALK</Filter>
-    </ClCompile>
-    <ClCompile Include="ui\UICarPanel.cpp">
-      <Filter>UI\Common\MainIngame</Filter>
     </ClCompile>
     <ClCompile Include="ui\UIHudStatesWnd.cpp">
       <Filter>UI\Common\MainIngame</Filter>
@@ -9437,9 +9356,6 @@
       <Filter>UI\Multiplayer\MM_MP\MapList</Filter>
     </ClCompile>
     <ClCompile Include="ui\ServerList.cpp">
-      <Filter>UI\Multiplayer\MM_MP\ServerList</Filter>
-    </ClCompile>
-    <ClCompile Include="ui\ServerList_GameSpy_func.cpp">
       <Filter>UI\Multiplayer\MM_MP\ServerList</Filter>
     </ClCompile>
     <ClCompile Include="ui\UIListItemServer.cpp">

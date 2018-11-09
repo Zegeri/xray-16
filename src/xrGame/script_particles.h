@@ -61,5 +61,3 @@ public:
     void StopPath();
     void PausePath(bool val);
 };
-
-#include "script_particles_inline.h"

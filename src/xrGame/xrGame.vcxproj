@@ -921,7 +921,6 @@
     <ClInclude Include="game_state_accumulator_inline.h" />
     <ClInclude Include="game_sv_artefacthunt.h" />
     <ClInclude Include="game_sv_base.h" />
-    <ClInclude Include="game_sv_base_console_vars.h" />
     <ClInclude Include="game_sv_capture_the_artefact.h" />
     <ClInclude Include="game_sv_deathmatch.h" />
     <ClInclude Include="game_sv_event_queue.h" />
@@ -1251,7 +1250,6 @@
     <ClInclude Include="script_object_action.h" />
     <ClInclude Include="script_object_action_inline.h" />
     <ClInclude Include="script_particles.h" />
-    <ClInclude Include="script_particles_inline.h" />
     <ClInclude Include="script_particle_action.h" />
     <ClInclude Include="script_particle_action_inline.h" />
     <ClInclude Include="script_property_evaluator_wrapper.h" />
@@ -1480,7 +1478,6 @@
     <ClInclude Include="ui\UIBuyWeaponTab.h" />
     <ClInclude Include="ui\UIBuyWndBase.h" />
     <ClInclude Include="ui\UIBuyWndShared.h" />
-    <ClInclude Include="ui\UICarPanel.h" />
     <ClInclude Include="ui\UICDkey.h" />
     <ClInclude Include="ui\UICellCustomItems.h" />
     <ClInclude Include="ui\UICellItem.h" />
@@ -1606,7 +1603,6 @@
     <ClInclude Include="wrapper_abstract_inline.h" />
     <ClInclude Include="xrClientsPool.h" />
     <ClInclude Include="xrGameSpyServer.h" />
-    <ClInclude Include="xrGameSpyServer_callbacks.h" />
     <ClInclude Include="xrServer.h" />
     <ClInclude Include="xrServerMapSync.h" />
     <ClInclude Include="xrServer_info.h" />
@@ -1826,7 +1822,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="Actor_Sleep.cpp" />
     <ClCompile Include="actor_statistic_mgr.cpp" />
     <ClCompile Include="Actor_Weapon.cpp" />
     <ClCompile Include="AdvancedDetector.cpp" />
@@ -2000,7 +1995,6 @@
     <ClCompile Include="ai\Monsters\Poltergeist\poltergeist_state_manager.cpp" />
     <ClCompile Include="ai\Monsters\Poltergeist\poltergeist_telekinesis.cpp" />
     <ClCompile Include="ai\Monsters\Pseudodog\pseudodog.cpp" />
-    <ClCompile Include="ai\Monsters\Pseudodog\pseudodog_psi_effector.cpp" />
     <ClCompile Include="ai\Monsters\Pseudodog\pseudodog_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2212,7 +2206,6 @@
     </ClCompile>
     <ClCompile Include="animation_utils.cpp" />
     <ClCompile Include="AnselManager.cpp" />
-    <ClCompile Include="antirad.cpp" />
     <ClCompile Include="Artefact.cpp" />
     <ClCompile Include="artefact_activation.cpp" />
     <ClCompile Include="artefact_script.cpp">
@@ -2235,7 +2228,6 @@
     <ClCompile Include="BastArtifact.cpp" />
     <ClCompile Include="best_scores_helper.cpp" />
     <ClCompile Include="best_scores_store.cpp" />
-    <ClCompile Include="BlackDrops.cpp" />
     <ClCompile Include="BlackGraviArtifact.cpp" />
     <ClCompile Include="black_list.cpp" />
     <ClCompile Include="Bolt.cpp" />
@@ -2243,7 +2235,6 @@
     <ClCompile Include="bone_groups.cpp" />
     <ClCompile Include="BottleItem.cpp" />
     <ClCompile Include="BreakableObject.cpp" />
-    <ClCompile Include="CameraEffector.cpp" />
     <ClCompile Include="CameraFirstEye.cpp" />
     <ClCompile Include="CameraLook.cpp" />
     <ClCompile Include="Car.cpp" />
@@ -2331,7 +2322,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="danger_object.cpp" />
     <ClCompile Include="danger_object_location.cpp" />
     <ClCompile Include="date_time.cpp" />
     <ClCompile Include="DBG_Car.cpp" />
@@ -2390,7 +2380,6 @@
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="event_conditions_collection.cpp" />
-    <ClCompile Include="ExoOutfit.cpp" />
     <ClCompile Include="Explosive.cpp" />
     <ClCompile Include="ExplosiveItem.cpp" />
     <ClCompile Include="ExplosiveRocket.cpp" />
@@ -2406,8 +2395,6 @@
     <ClCompile Include="fire_disp_controller.cpp" />
     <ClCompile Include="first_bullet_controller.cpp" />
     <ClCompile Include="flare.cpp" />
-    <ClCompile Include="FoodItem.cpp" />
-    <ClCompile Include="FryupZone.cpp" />
     <ClCompile Include="fs_registrator_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2465,7 +2452,6 @@
     <ClCompile Include="game_sv_artefacthunt.cpp" />
     <ClCompile Include="game_sv_artefacthunt_process_event.cpp" />
     <ClCompile Include="game_sv_base.cpp" />
-    <ClCompile Include="game_sv_base_console_vars.cpp" />
     <ClCompile Include="game_sv_capture_the_artefact.cpp" />
     <ClCompile Include="game_sv_capture_the_artefact_buy_event.cpp" />
     <ClCompile Include="game_sv_capture_the_artefact_myteam_impl.cpp" />
@@ -2634,10 +2620,6 @@
     <ClCompile Include="LevelGraphDebugRender.cpp" />
     <ClCompile Include="Level_input.cpp" />
     <ClCompile Include="Level_load.cpp" />
-    <ClCompile Include="level_map_locations.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Level_network.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2675,7 +2657,6 @@
     </ClCompile>
     <ClCompile Include="map_spot.cpp" />
     <ClCompile Include="material_manager.cpp" />
-    <ClCompile Include="medkit.cpp" />
     <ClCompile Include="memory_manager.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2686,7 +2667,6 @@
     </ClCompile>
     <ClCompile Include="MercuryBall.cpp" />
     <ClCompile Include="Message_Filter.cpp" />
-    <ClCompile Include="MilitaryOutfit.cpp" />
     <ClCompile Include="Mincer.cpp" />
     <ClCompile Include="mincer_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
@@ -2720,7 +2700,6 @@
     <ClCompile Include="mpactor_dump_impl.cpp" />
     <ClCompile Include="MPPlayersBag.cpp" />
     <ClCompile Include="mp_config_sections.cpp" />
-    <ClCompile Include="Needles.cpp" />
     <ClCompile Include="NoGravityZone.cpp" />
     <ClCompile Include="object_actions.cpp" />
     <ClCompile Include="object_handler.cpp">
@@ -2734,7 +2713,6 @@
     <ClCompile Include="obstacles_query.cpp" />
     <ClCompile Include="ParticlesObject.cpp" />
     <ClCompile Include="ParticlesPlayer.cpp" />
-    <ClCompile Include="particle_params.cpp" />
     <ClCompile Include="particle_params_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2878,7 +2856,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="ScientificOutfit.cpp" />
     <ClCompile Include="Scope.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2892,7 +2869,6 @@
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="script_abstract_action.cpp" />
-    <ClCompile Include="script_action_condition.cpp" />
     <ClCompile Include="script_action_condition_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2909,7 +2885,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="script_animation_action.cpp" />
     <ClCompile Include="script_animation_action_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2940,7 +2915,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="script_entity_action.cpp" />
     <ClCompile Include="script_entity_action_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -2997,7 +2971,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="script_hit.cpp" />
     <ClCompile Include="script_hit_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -3371,7 +3344,6 @@
     <ClCompile Include="ui\MMSound.cpp" />
     <ClCompile Include="ui\Restrictions.cpp" />
     <ClCompile Include="ui\ServerList.cpp" />
-    <ClCompile Include="ui\ServerList_GameSpy_func.cpp" />
     <ClCompile Include="ui\TeamInfo.cpp" />
     <ClCompile Include="ui\UIAchievements.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
@@ -3398,7 +3370,6 @@
     <ClCompile Include="ui\UIBoosterInfo.cpp" />
     <ClCompile Include="ui\UIBuyWeaponTab.cpp" />
     <ClCompile Include="ui\UIBuyWndShared.cpp" />
-    <ClCompile Include="ui\UICarPanel.cpp" />
     <ClCompile Include="ui\UICDkey.cpp" />
     <ClCompile Include="ui\UICellCustomItems.cpp" />
     <ClCompile Include="ui\UICellItem.cpp" />
@@ -3572,7 +3543,6 @@
     <ClCompile Include="WeaponFire.cpp" />
     <ClCompile Include="WeaponFN2000.cpp" />
     <ClCompile Include="WeaponGroza.cpp" />
-    <ClCompile Include="WeaponHPSA.cpp" />
     <ClCompile Include="WeaponKnife.cpp" />
     <ClCompile Include="WeaponLR300.cpp" />
     <ClCompile Include="WeaponMagazined.cpp">
@@ -3581,7 +3551,6 @@
     </ClCompile>
     <ClCompile Include="WeaponMagazinedWGrenade.cpp" />
     <ClCompile Include="WeaponPistol.cpp" />
-    <ClCompile Include="WeaponPM.cpp" />
     <ClCompile Include="WeaponRevolver.cpp" />
     <ClCompile Include="WeaponRG6.cpp" />
     <ClCompile Include="WeaponRPG7.cpp" />
@@ -3603,7 +3572,6 @@
     <ClCompile Include="xrClientsPool.cpp" />
     <ClCompile Include="xrGame.cpp" />
     <ClCompile Include="xrGameSpyServer.cpp" />
-    <ClCompile Include="xrGameSpyServer_callbacks.cpp" />
     <ClCompile Include="xrGameSpy_GameSpyFuncs.cpp" />
     <ClCompile Include="xrgame_dll_detach.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>

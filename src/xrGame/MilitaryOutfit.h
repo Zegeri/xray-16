@@ -9,10 +9,7 @@
 
 class CMilitaryOutfit : public CCustomOutfit
 {
-private:
-    typedef CCustomOutfit inherited;
-
 public:
-    CMilitaryOutfit(void);
-    virtual ~CMilitaryOutfit(void);
+    CMilitaryOutfit() = default;
+    virtual ~CMilitaryOutfit() = default;
 };

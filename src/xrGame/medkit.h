@@ -10,6 +10,6 @@
 class CMedkit : public CEatableItemObject
 {
 public:
-    CMedkit();
-    virtual ~CMedkit();
+    CMedkit() = default;
+    virtual ~CMedkit() = default;
 };

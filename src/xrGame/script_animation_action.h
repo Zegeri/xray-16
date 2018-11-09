@@ -37,7 +37,7 @@ public:
     // Monster
     // -------------------------------------------------------------------------------------------------
     IC CScriptAnimationAction(MonsterSpace::EScriptMonsterAnimAction tAnimAction, int index);
-    virtual ~CScriptAnimationAction();
+    virtual ~CScriptAnimationAction() = default;
     IC void SetAnimation(LPCSTR caAnimationToPlay);
     IC void SetMentalState(MonsterSpace::EMentalState tMentalState);
     IC void initialize();

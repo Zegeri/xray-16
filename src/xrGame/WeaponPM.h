@@ -7,13 +7,9 @@
 
 class CWeaponPM : public CWeaponPistol
 {
-private:
-    typedef CWeaponPistol inherited;
-
-protected:
 public:
-    CWeaponPM();
-    virtual ~CWeaponPM();
+    CWeaponPM() = default;
+    virtual ~CWeaponPM() = default;
 };
 
 #endif //__XR_WEAPON_PM_H__

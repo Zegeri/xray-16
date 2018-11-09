@@ -7,10 +7,10 @@ class CFryupZone : public CScriptObject
     typedef CScriptObject inherited;
 
 public:
-    CFryupZone();
-    virtual ~CFryupZone();
+    CFryupZone() = default;
+    virtual ~CFryupZone() = default;
 
 #ifdef DEBUG
-    virtual void OnRender();
+    virtual void OnRender() {};
 #endif
 };

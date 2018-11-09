@@ -33,7 +33,7 @@ public:
 public:
     IC CScriptActionCondition();
     IC CScriptActionCondition(u32 dwFlags, double dTime = -1);
-    virtual ~CScriptActionCondition();
+    virtual ~CScriptActionCondition() = default;
     IC void initialize();
 };
 

@@ -25,7 +25,7 @@ public:
 public:
     IC CScriptHit();
     IC CScriptHit(const CScriptHit* tpLuaHit);
-    virtual ~CScriptHit();
+    virtual ~CScriptHit() = default;
     IC void set_bone_name(LPCSTR bone_name);
 };
 

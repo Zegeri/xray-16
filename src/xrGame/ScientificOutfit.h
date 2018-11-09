@@ -9,10 +9,7 @@
 
 class CScientificOutfit : public CCustomOutfit
 {
-private:
-    typedef CCustomOutfit inherited;
-
 public:
-    CScientificOutfit(void);
-    virtual ~CScientificOutfit(void);
+    CScientificOutfit() = default;
+    virtual ~CScientificOutfit() = default;
 };
