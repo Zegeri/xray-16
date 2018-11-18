@@ -2,6 +2,7 @@
 
 #include "state_defs.h"
 #include "control_com_defs.h"
+#include "ai_monster_defs.h"
 
 // Lain: added
 #ifdef DEBUG

@@ -177,7 +177,7 @@ void CSXML_IdToIndex::InitInternal()
             index++;
         }
         if (0 == items_num)
-            delete_data(uiXml);
+            xr_delete(uiXml);
     }
 }
 

@@ -2,6 +2,7 @@
 
 #include "xrUICore/Windows/UIWindow.h"
 #include "xrUICore/Callbacks/UIWndCallback.h"
+#include "xrUICore/ui_defs.h"
 
 class CUICellContainer;
 class CUIScrollBar;

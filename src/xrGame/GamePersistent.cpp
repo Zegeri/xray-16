@@ -34,7 +34,9 @@
 #include "xrEngine/xr_input.h"
 #include "xrEngine/x_ray.h"
 #include "ui/UILoadingScreen.h"
+#ifdef WINDOWS
 #include "AnselManager.h"
+#endif
 
 #ifndef MASTER_GOLD
 #include "CustomMonster.h"

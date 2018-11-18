@@ -10,6 +10,7 @@
 #include "StdAfx.h"
 #include "UILoadingScreen.h"
 #include "UILoadingScreenHardcoded.h"
+#include "ui/UIXmlInit.h"
 
 #include "xrEngine/x_ray.h"
 #include "xrEngine/GameFont.h"

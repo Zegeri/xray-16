@@ -4,6 +4,8 @@
 #include "Common/Noncopyable.hpp"
 #include "xrCore/Containers/AssociativeVector.hpp"
 #include <GameSpy/sake/sake.h>
+#undef min
+#undef max
 #include "profile_data_types.h"
 #include "profile_data_types_script.h"
 

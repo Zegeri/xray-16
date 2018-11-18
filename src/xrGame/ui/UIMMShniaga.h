@@ -1,7 +1,6 @@
 #pragma once
-#include "xrUICore/Windows/UIWindow.h"
+#include "xrUICore/Static/UIStatic.h"
 
-class CUIStatic;
 class CUITextWnd;
 class CUIXml;
 class CUIScrollView;

@@ -10,12 +10,9 @@
 #include "xrCore/xrDebug_macros.h"
 
 #define TEMPLATE_SPECIALIZATION \
-    template <typename _data_type, typename _vertex_id_type, typename _graph_type\
->
+    template <typename _data_type, typename _vertex_id_type, typename _graph_type>
 
-#define CSGraphVertex \
-    CVertex<_data_type, _vertex_id_type, _graph_type\
->
+#define CSGraphVertex CVertex<_data_type, _vertex_id_type, _graph_type>
 
 TEMPLATE_SPECIALIZATION
 IC CSGraphVertex::CVertex(const _data_type& data, const _vertex_id_type& vertex_id, size_t* edge_count)
@@ -45,7 +42,7 @@ IC CSGraphVertex::~CVertex()
 }
 
 TEMPLATE_SPECIALIZATION
-IC const typename _graph_type::CEdge* CSGraphVertex::edge(const _vertex_id_type& vertex_id) const
+IC const typename _graph_type::Edge* CSGraphVertex::edge(const _vertex_id_type& vertex_id) const
 {
     typename EDGES::const_iterator I = std::find(edges().begin(), edges().end(), vertex_id);
     if (m_edges.end() == I)
@@ -54,7 +51,7 @@ IC const typename _graph_type::CEdge* CSGraphVertex::edge(const _vertex_id_type&
 }
 
 TEMPLATE_SPECIALIZATION
-IC typename _graph_type::CEdge* CSGraphVertex::edge(const _vertex_id_type& vertex_id)
+IC typename _graph_type::Edge* CSGraphVertex::edge(const _vertex_id_type& vertex_id)
 {
     typename EDGES::iterator I = std::find(m_edges.begin(), m_edges.end(), vertex_id);
     if (m_edges.end() == I)
@@ -63,12 +60,12 @@ IC typename _graph_type::CEdge* CSGraphVertex::edge(const _vertex_id_type& verte
 }
 
 TEMPLATE_SPECIALIZATION
-IC void CSGraphVertex::add_edge(CVertex* vertex, const typename _graph_type::CEdge::edge_weight_type& edge_weight)
+IC void CSGraphVertex::add_edge(CVertex* vertex, const typename _graph_type::Edge::edge_weight_type& edge_weight)
 {
     typename EDGES::iterator I = std::find(m_edges.begin(), m_edges.end(), vertex->vertex_id());
     VERIFY(m_edges.end() == I);
     vertex->on_edge_addition(this);
-    m_edges.push_back(typename _graph_type::CEdge(edge_weight, vertex));
+    m_edges.push_back(typename _graph_type::Edge(edge_weight, vertex));
     ++*m_edge_count;
 }
 

@@ -146,7 +146,7 @@ void loophole::fill_transitions(luabind::object const& transitions_table)
             m_transitions.add_vertex(Loki::EmptyType(), action_to);
 
         m_transitions.add_edge(action_from, action_to, weight);
-        TransitionGraph::CEdge* edge = m_transitions.edge(action_from, action_to);
+        TransitionGraph::Edge* edge = m_transitions.edge(action_from, action_to);
         VERIFY(!tmp.empty());
         edge->data() = tmp;
     }
@@ -166,7 +166,7 @@ smart_cover::action::Animations const& loophole::action_animations(
 loophole::TransitionData const& loophole::transition_animations(
     shared_str const& action_from, shared_str const& action_to) const
 {
-    TransitionGraph::CEdge const* edge =
+    TransitionGraph::Edge const* edge =
         m_transitions.edge(transform_vertex(action_from, true), transform_vertex(action_to, false));
     VERIFY2(edge, make_string("transition [%s]->[%s] absent", action_from.c_str(), action_to.c_str()));
     return (edge->data());

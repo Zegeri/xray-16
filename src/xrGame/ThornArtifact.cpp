@@ -5,7 +5,6 @@
 
 #include "StdAfx.h"
 #include "ThornArtifact.h"
-#include "xrPhysics/PhysicsShell.h"
 
 CThornArtefact::CThornArtefact(void) {}
 CThornArtefact::~CThornArtefact(void) {}

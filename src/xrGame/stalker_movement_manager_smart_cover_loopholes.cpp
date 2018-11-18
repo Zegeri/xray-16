@@ -149,7 +149,7 @@ stalker_movement_manager_smart_cover::transition_action const& stalker_movement_
     smart_cover::cover const& cover, shared_str const& loophole_id0, shared_str const& loophole_id1,
     Fvector const& position, Fvector& result_position, u32& result_vertex_id, EBodyState* target_body_state) const
 {
-    typedef smart_cover::description::TransitionGraph::CEdge edge_type;
+    typedef smart_cover::description::TransitionGraph::Edge edge_type;
     typedef smart_cover::description::ActionsList ActionsList;
     typedef smart_cover::transitions::action action;
 
@@ -223,7 +223,7 @@ stalker_movement_manager_smart_cover::transition_action const& stalker_movement_
 stalker_movement_manager_smart_cover::transition_action const& stalker_movement_manager_smart_cover::action(
     smart_cover::cover const& cover, shared_str const& loophole_id0, shared_str const& loophole_id1) const
 {
-    typedef smart_cover::description::TransitionGraph::CEdge edge_type;
+    typedef smart_cover::description::TransitionGraph::Edge edge_type;
     typedef smart_cover::description::ActionsList ActionsList;
     typedef smart_cover::transitions::action action;
 

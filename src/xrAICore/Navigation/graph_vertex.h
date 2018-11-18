@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include "Common/object_broker.h"
 #include "xrCommon/xr_vector.h"
 
 template <typename _data_type, typename _vertex_id_type, typename _graph_type>
@@ -16,8 +15,8 @@ class CVertex
 {
 public:
     typedef _vertex_id_type vertex_id_type;
-    typedef typename _graph_type::CEdge edge_type;
-    typedef typename _graph_type::CEdge::edge_weight_type edge_weight_type;
+    typedef typename _graph_type::Edge edge_type;
+    typedef typename _graph_type::Edge::edge_weight_type edge_weight_type;
     typedef xr_vector<edge_type> EDGES;
     typedef xr_vector<CVertex*> VERTICES;
 
@@ -35,7 +34,7 @@ public:
     IC CVertex(const _data_type& data, const _vertex_id_type& vertex_id, size_t* edge_count);
     IC ~CVertex();
     IC bool operator==(const CVertex& obj) const;
-    IC void add_edge(CVertex* vertex, const typename _graph_type::CEdge::edge_weight_type& edge_weight);
+    IC void add_edge(CVertex* vertex, const edge_weight_type& edge_weight);
     IC void remove_edge(const _vertex_id_type& vertex_id);
     IC void on_edge_addition(CVertex* vertex);
     IC void on_edge_removal(const CVertex* vertex);

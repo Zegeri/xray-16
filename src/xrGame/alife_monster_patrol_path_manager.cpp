@@ -128,11 +128,10 @@ bool CALifeMonsterPatrolPathManager::location_reached() const
 
 void CALifeMonsterPatrolPathManager::navigate()
 {
-    const CPatrolPath::CVertex& vertex = *path().vertex(m_current_vertex_index);
+    const CPatrolPath::Vertex& vertex = *path().vertex(m_current_vertex_index);
 
-    typedef CPatrolPath::CVertex::EDGES EDGES;
-    EDGES::const_iterator I = vertex.edges().begin(), B = I;
-    EDGES::const_iterator E = vertex.edges().end();
+    auto I = vertex.edges().cbegin(), B = I;
+    auto E = vertex.edges().cend();
 
     u32 branching_factor = 0;
     for (; I != E; ++I)

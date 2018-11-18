@@ -164,7 +164,7 @@ void description::load_transitions(shared_str const& table_id)
             m_transitions.add_vertex(Loki::EmptyType(), vertex_1_id);
 
         m_transitions.add_edge(vertex_0_id, vertex_1_id, weight);
-        TransitionGraph::CEdge* edge = m_transitions.edge(vertex_0_id, vertex_1_id);
+        TransitionGraph::Edge* edge = m_transitions.edge(vertex_0_id, vertex_1_id);
         load_actions(table, edge->data());
     }
 }
@@ -195,13 +195,13 @@ IC void delete_data(const CGraphAbstract<_data_type, _edge_weight_type, _vertex_
 
     for (auto vi = verts.begin(); vi != verts.end(); ++vi)
     {
-        typename Graph::CVertex* vert = (*vi).second;
+        typename Graph::Vertex* vert = (*vi).second;
         delete_data(vert->data());
 
         Edges& edges = const_cast<Edges&>(vert->edges());
         for (auto ei = edges.begin(); ei != edges.end(); ++ei)
         {
-            typename Graph::CEdge& edge = (*ei);
+            typename Graph::Edge& edge = (*ei);
             delete_data(edge.data());
         }
     }

@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "xrUICore/Static/UIStatic.h"
 #include "xrScriptEngine/ScriptExporter.hpp"
+#include "script_game_object.h"
 
 using namespace luabind;
 

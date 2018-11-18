@@ -3,7 +3,6 @@
 #include "hud_item_object.h"
 #include "hit_immunity.h"
 #include "xrPhysics/PHUpdateObject.h"
-#include "xrAICore/Navigation/PatrolPath/patrol_path.h"
 
 class SArtefactActivation;
 struct SArtefactDetectorsSupport;
@@ -129,23 +128,4 @@ public:
         o_fastmode = FALSE;
         // processing_deactivate		();
     }
-};
-
-struct SArtefactDetectorsSupport
-{
-    CArtefact* m_parent;
-    ref_sound m_sound;
-
-    Fvector m_path_moving_force;
-    u32 m_switchVisTime;
-    const CPatrolPath* m_currPatrolPath;
-    const CPatrolPath::CVertex* m_currPatrolVertex;
-    Fvector m_destPoint;
-
-    SArtefactDetectorsSupport(CArtefact* A);
-    ~SArtefactDetectorsSupport();
-    void SetVisible(bool);
-    void FollowByPath(LPCSTR path_name, int start_idx, Fvector force);
-    void UpdateOnFrame();
-    void Blink();
 };

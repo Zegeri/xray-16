@@ -537,7 +537,7 @@ Fvector CAI_Rat::get_next_target_point()
         return Position();
     }
 
-    const CPatrolPath::CVertex* vertex = m_path->vertex(m_current_way_point);
+    const CPatrolPath::Vertex* vertex = m_path->vertex(m_current_way_point);
 
     if (Position().distance_to(ai().level_graph().vertex_position(vertex->data().level_vertex_id())) < 1.5f)
     {
@@ -559,7 +559,7 @@ void CAI_Rat::draw_way()
 {
     if (!m_path)
         return;
-    const CPatrolPath::CVertex* vertex;
+    const CPatrolPath::Vertex* vertex;
     Fvector P1, P2;
     Fmatrix m_sphere;
 

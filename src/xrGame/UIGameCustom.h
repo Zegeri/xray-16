@@ -5,13 +5,13 @@
 #include "gametype_chooser.h"
 #include "UIDialogHolder.h"
 #include "xrEngine/CustomHUD.h"
-#include "script_game_object.h"
 #include "xrCommon/xr_string.h"
 
 // fwd. decl.
 class CUI;
 class CTeamBaseZone;
 class game_cl_GameState;
+class CScriptGameObject;
 class CUIDialogWnd;
 class CUICaption;
 class CUIStatic;

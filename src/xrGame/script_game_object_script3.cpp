@@ -33,7 +33,11 @@
 #include "Car.h"
 #include "ZoneCampfire.h"
 #include "PhysicObject.h"
+#include "Actor.h"
 #include "Artefact.h"
+#include "Weapon.h"
+#include "WeaponMagazined.h"
+#include "ai/stalker/ai_stalker.h"
 
 using namespace luabind;
 using namespace luabind::policy;

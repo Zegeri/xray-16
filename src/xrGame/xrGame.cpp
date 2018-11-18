@@ -7,6 +7,7 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
+#include "string_table.h"
 #include "object_factory.h"
 #include "xrUICore/XML/xrUIXmlParser.h"
 #include "xr_level_controller.h"

@@ -10,7 +10,6 @@
 
 #include "smart_cover_detail.h"
 #include "smart_cover_planner_actions.h"
-#include "Common/Noncopyable.hpp"
 #include "xrServer_Space.h"
 
 class CAI_Stalker;

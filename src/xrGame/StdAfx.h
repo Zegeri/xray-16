@@ -12,9 +12,7 @@
 
 #include "xrScriptEngine/DebugMacros.hpp"
 #include "game_type.h"
-// xrEngine src file count is ~1100.
-// Comments following individual includes refers to number of times they are included in xrEngine as a whole.
-//#include <assert.h> // ~440 - but it has no include guard! Perhaps that's intentional?
+#include "ai_space.h"
 #include <math.h>
 #include "xrServerEntities/smart_cast.h" // a lot
 #include "Level.h"

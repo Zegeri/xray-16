@@ -8,6 +8,8 @@
 
 #pragma once
 #include "xrCore/xrMemory.h"
+#include "object_type_traits.h"
+#include <queue>
 
 struct CDestroyer
 {

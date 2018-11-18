@@ -9,6 +9,11 @@
 #pragma once
 
 #include "CharacterPhysicsSupport.h"
+#include "ai/stalker/ai_stalker.h"
+#include "stalker_movement_manager_smart_cover.h"
+#include "Inventory.h"
+#include "Missile.h"
+#include "Weapon.h"
 
 IC CStalkerAnimationManager::EBodyState CStalkerAnimationManager::body_state() const
 {

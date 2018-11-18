@@ -42,6 +42,25 @@
         inst_z;                                     \
     }
 
+struct SArtefactDetectorsSupport
+{
+    CArtefact* m_parent;
+    ref_sound m_sound;
+
+    Fvector m_path_moving_force;
+    u32 m_switchVisTime;
+    const CPatrolPath* m_currPatrolPath;
+    const CPatrolPath::Vertex* m_currPatrolVertex;
+    Fvector m_destPoint;
+
+    SArtefactDetectorsSupport(CArtefact* A);
+    ~SArtefactDetectorsSupport();
+    void SetVisible(bool);
+    void FollowByPath(LPCSTR path_name, int start_idx, Fvector force);
+    void UpdateOnFrame();
+    void Blink();
+};
+
 CArtefact::CArtefact()
 {
     shedule.t_min = 20;

@@ -35,7 +35,7 @@ void CPhraseDialog::Init(CPhraseDialogManager* speaker_first, CPhraseDialogManag
     m_SaidPhraseID = "";
     m_PhraseVector.clear();
 
-    CPhraseGraph::CVertex* phrase_vertex = data()->m_PhraseGraph.vertex("0");
+    CPhraseGraph::Vertex* phrase_vertex = data()->m_PhraseGraph.vertex("0");
     THROW(phrase_vertex);
     m_PhraseVector.push_back(phrase_vertex->data());
 
@@ -84,7 +84,7 @@ bool CPhraseDialog::SayPhrase(DIALOG_SHARED_PTR& phrase_dialog, const shared_str
     if (!first_is_speaking)
         std::swap(pSpeakerGO1, pSpeakerGO2);
 
-    CPhraseGraph::CVertex* phrase_vertex = phrase_dialog->data()->m_PhraseGraph.vertex(phrase_dialog->m_SaidPhraseID);
+    CPhraseGraph::Vertex* phrase_vertex = phrase_dialog->data()->m_PhraseGraph.vertex(phrase_dialog->m_SaidPhraseID);
     THROW(phrase_vertex);
 
     CPhrase* last_phrase = phrase_vertex->data();
@@ -103,11 +103,11 @@ bool CPhraseDialog::SayPhrase(DIALOG_SHARED_PTR& phrase_dialog, const shared_str
     else
     {
         //обновить список фраз, которые сейчас сможет говорить собеседник
-        for (xr_vector<CPhraseGraph::CEdge>::const_iterator it = phrase_vertex->edges().begin();
+        for (xr_vector<CPhraseGraph::Edge>::const_iterator it = phrase_vertex->edges().begin();
              it != phrase_vertex->edges().end(); it++)
         {
-            const CPhraseGraph::CEdge& edge = *it;
-            CPhraseGraph::CVertex* next_phrase_vertex = phrase_dialog->data()->m_PhraseGraph.vertex(edge.vertex_id());
+            const CPhraseGraph::Edge& edge = *it;
+            CPhraseGraph::Vertex* next_phrase_vertex = phrase_dialog->data()->m_PhraseGraph.vertex(edge.vertex_id());
             THROW(next_phrase_vertex);
             shared_str next_phrase_id = next_phrase_vertex->vertex_id();
             if (next_phrase_vertex->data()->GetScriptHelper()->Precondition(
@@ -145,7 +145,7 @@ bool CPhraseDialog::SayPhrase(DIALOG_SHARED_PTR& phrase_dialog, const shared_str
 
 CPhrase* CPhraseDialog::GetPhrase(const shared_str& phrase_id)
 {
-    CPhraseGraph::CVertex* phrase_vertex = data()->m_PhraseGraph.vertex(phrase_id);
+    CPhraseGraph::Vertex* phrase_vertex = data()->m_PhraseGraph.vertex(phrase_id);
     THROW(phrase_vertex);
 
     return phrase_vertex->data();
@@ -153,7 +153,7 @@ CPhrase* CPhraseDialog::GetPhrase(const shared_str& phrase_id)
 
 LPCSTR CPhraseDialog::GetPhraseText(const shared_str& phrase_id, bool current_speaking)
 {
-    // CPhraseGraph::CVertex* phrase_vertex = data()->m_PhraseGraph.vertex(phrase_id);
+    // CPhraseGraph::Vertex* phrase_vertex = data()->m_PhraseGraph.vertex(phrase_id);
     // THROW(phrase_vertex);
     // CPhrase*	ph = phrase_vertex->data();
     CPhrase* ph = GetPhrase(phrase_id);
@@ -253,7 +253,7 @@ CPhrase* CPhraseDialog::AddPhrase(
     LPCSTR text, const shared_str& phrase_id, const shared_str& prev_phrase_id, int goodwil_level)
 {
     CPhrase* phrase = NULL;
-    CPhraseGraph::CVertex* _vertex = data()->m_PhraseGraph.vertex(phrase_id);
+    CPhraseGraph::Vertex* _vertex = data()->m_PhraseGraph.vertex(phrase_id);
     if (!_vertex)
     {
         phrase = new CPhrase();

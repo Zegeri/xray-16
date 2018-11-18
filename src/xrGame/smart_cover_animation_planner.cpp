@@ -24,7 +24,6 @@
 #include "smart_cover_planner_actions.h"
 #include "smart_cover_evaluators.h"
 #include "smart_cover_animation_selector.h"
-#include "clsid_game.h"
 #include "game_object_space.h"
 
 using smart_cover::animation_planner;

@@ -32,6 +32,7 @@
 
 #include "StdAfx.h"
 #include "limb.h"
+#include "xrPhysics/MathUtils.h"
 
 enum
 {
